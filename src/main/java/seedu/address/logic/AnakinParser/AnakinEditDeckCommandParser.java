@@ -32,7 +32,8 @@ public class AnakinEditDeckCommandParser implements AnakinParserInterface<Anakin
         try {
             index = AnakinParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AnakinEditDeckCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AnakinEditDeckCommand.MESSAGE_USAGE), pe);
         }
 
         EditDeckDescriptor editDeckDescriptor = new EditDeckDescriptor();
