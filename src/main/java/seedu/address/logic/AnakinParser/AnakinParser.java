@@ -11,6 +11,7 @@ import seedu.address.logic.AnakinCommands.AnakinCommand;
 import seedu.address.logic.AnakinCommands.AnakinDelCardCommand;
 import seedu.address.logic.AnakinCommands.AnakinDelDeckCommand;
 import seedu.address.logic.AnakinCommands.AnakinEditCardCommand;
+import seedu.address.logic.AnakinCommands.AnakinEditDeckCommand;
 import seedu.address.logic.AnakinCommands.AnakinNewCardCommand;
 import seedu.address.logic.AnakinCommands.AnakinNewDeckCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -45,6 +46,9 @@ public class AnakinParser {
         switch (commandWord) {
         case AnakinNewDeckCommand.COMMAND_WORD:
             return new AnakinNewDeckCommandParser().parse(arguments);
+
+        case AnakinEditDeckCommand.COMMAND_WORD:
+            return new AnakinEditDeckCommandParser().parse(arguments);
 
         case AnakinDelDeckCommand.COMMAND_WORD:
             return new AnakinDelDeckCommandParser().parse(arguments);

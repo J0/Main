@@ -7,7 +7,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.anakindeck.AnakinAnswer;
 import seedu.address.model.anakindeck.AnakinQuestion;
-import seedu.address.model.person.Name;
+import seedu.address.model.anakindeck.Name;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
