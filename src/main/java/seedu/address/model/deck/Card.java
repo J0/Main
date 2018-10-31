@@ -19,7 +19,14 @@ public class Card {
         requireAllNonNull(question, answer);
         this.question = question;
         this.answer = answer;
-        performance = Performance.DEFAULT;
+        this.performance = Performance.DEFAULT;
+    }
+    
+    public Card(Question question, Answer answer, Performance performance ) {
+        this.question = question;
+        this.answer = answer;
+        this.performance = performance;
+
     }
 
     public Question getQuestion() {
