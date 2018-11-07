@@ -15,7 +15,7 @@ public class UserPrefs {
     private Path anakinFilePath = Paths.get("data", "anakin.xml");
 
     public UserPrefs() {
-        setGuiSettings(500, 500, 0, 0);
+        setGuiSettings(690, 500, 0, 0);
     }
 
     public GuiSettings getGuiSettings() {

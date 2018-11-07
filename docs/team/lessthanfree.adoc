@@ -1,0 +1,63 @@
+= David Goh - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Anakin
+
+---
+
+== Overview
+
+Anakin is a desktop flashcard management application. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+* *Area of responsibility*: Logic
+** Role: Manage command structure, command execution (by making API calls to the main model), and parsing of user input arguments.
+
+* *Major enhancement*: added *the ability to import/export decks of flashcards*
+** What it does: allows users to export a deck to a specified file location. Also allows the user to import any decks by providing the location of the file.
+** Justification: This feature improves the product significantly because a user can share decks across devices or even with other users.
+** Highlights: This enhancement has a major effect on user experience. It required an in-depth analysis of design alternatives.
+
+* *Major enhancement*: added *the ability to navigate into a deck*
+** What it does: allows users to select and enter a deck object.
+** Justification: The UI would be too cluttered if every deck displayed all the cards it contained. Instead we opted to have cards of each hidden until the user enters a deck. Only then will a user be able to see the cards of that deck.
+** Highlights: Subsequent card level operations implemented by other team members rely on the framework provided by this feature as card creation, editing and deletion actions are only available from inside a deck.
+
+* *Minor enhancement*: added a list command for decks that clears the current filters and displays all decks in Anakin.
+
+* *Code contributed*: [https://github.com/CS2103-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed+author%3ALessthanfree[Functional code]] [https://github.com[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed release `v1.3` - `v1.3.1` on GitHub
+** Enhancements to existing features:
+*** Wrote several additional tests for existing features to increase coverage from 75*% to 80*% (Pull requests https://github.com[#36], https://github.com[#38])
+** Documentation:
+*** Drafted the first version of both the User Guide and Developer Guide
+*** Maintained the User Guide throughout development: https://github.com[#14]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+
+
+== Contributions to the User Guide
+
+|===
+|_I contributed and maintained almost the entirety of the Anakin UserGuide, except for the `sort` and `locate` feature documentation._
+|===
+
+include::../UserGuide.adoc[tag=import]
+
+include::../UserGuide.adoc[tag=export]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=logic]
+
+include::../DeveloperGuide.adoc[tag=importexportimplementation]

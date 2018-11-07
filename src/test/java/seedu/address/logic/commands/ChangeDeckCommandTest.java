@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.ChangeDeckCommand.MESSAGE_CD_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showDeckAtIndex;
@@ -33,11 +34,11 @@ public class ChangeDeckCommandTest {
         Deck deckToEnter = model.getFilteredDeckList().get(INDEX_FIRST_DECK.getZeroBased());
         ChangeDeckCommand cdCommand = new ChangeDeckCommand(INDEX_FIRST_DECK);
 
-        String expectedMessage = String.format(ChangeDeckCommand.MESSAGE_CD_SUCCESS, deckToEnter);
+        String expectedMessage = String.format(MESSAGE_CD_SUCCESS, deckToEnter);
 
         ModelManager expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
         expectedModel.getIntoDeck(deckToEnter);
-        expectedModel.commitAnakin();
+        expectedModel.commitAnakin(ChangeDeckCommand.COMMAND_WORD);
 
         assertCommandSuccess(cdCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -56,31 +57,33 @@ public class ChangeDeckCommandTest {
         Deck deckToEnter = model.getFilteredDeckList().get(INDEX_FIRST_DECK.getZeroBased());
         ChangeDeckCommand cdCommand = new ChangeDeckCommand(INDEX_FIRST_DECK);
 
-        String expectedMessage = String.format(ChangeDeckCommand.MESSAGE_CD_SUCCESS, deckToEnter);
+        String expectedMessage = String.format(MESSAGE_CD_SUCCESS, deckToEnter);
 
         Model expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
         expectedModel.getIntoDeck(deckToEnter);
-        expectedModel.commitAnakin();
+        expectedModel.commitAnakin(ChangeDeckCommand.COMMAND_WORD);
 
         assertCommandSuccess(cdCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
-    @Test
-    public void execute_validLeaveDeck_success() {
-        Model executedModel = new ModelManager(model.getAnakin(), new UserPrefs());
-        Deck deckToEnter = model.getFilteredDeckList().get(INDEX_FIRST_DECK.getZeroBased());
-        ChangeDeckCommand cdCommand = new ChangeDeckCommand();
 
-        String expectedMessage = String.format(ChangeDeckCommand.MESSAGE_EXIT_SUCCESS);
+    @Test
+    public void execute_validEnterDeck_success() {
+        Model actualModel = new ModelManager(this.model.getAnakin(), new UserPrefs());
+        Deck deckToEnter = this.model.getFilteredDeckList().get(INDEX_FIRST_DECK.getZeroBased());
+        ChangeDeckCommand cdCommand = new ChangeDeckCommand(INDEX_FIRST_DECK);
+
+        String expectedMessage = String.format(MESSAGE_CD_SUCCESS, deckToEnter);
 
         // Enter deck so that cdCommand can leave it
-        executedModel.getIntoDeck(deckToEnter);
+        Model expectedModel = new ModelManager(actualModel.getAnakin(), new UserPrefs());
 
-        Model expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
-        expectedModel.commitAnakin();
+        expectedModel.getIntoDeck(deckToEnter);
+        expectedModel.commitAnakin(ChangeDeckCommand.COMMAND_WORD);
 
-        assertCommandSuccess(cdCommand, executedModel, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(cdCommand, actualModel, commandHistory, expectedMessage, expectedModel);
     }
+
 
     @Test
     public void execute_invalidLeaveDeck_throwsCommandException() {

@@ -11,9 +11,7 @@ import seedu.address.model.deck.Deck;
 import seedu.address.model.deck.UniqueCardList;
 import seedu.address.model.deck.UniqueDeckList;
 import seedu.address.model.deck.anakinexceptions.DeckImportException;
-import seedu.address.model.deck.anakinexceptions.DeckNotFoundException;
 import seedu.address.model.deck.anakinexceptions.DuplicateDeckException;
-import seedu.address.model.deck.anakinexceptions.IllegalOperationWhileReviewingDeckException;
 import seedu.address.model.deck.anakinexceptions.NotReviewingDeckException;
 import seedu.address.storage.portmanager.PortManager;
 
@@ -25,18 +23,21 @@ public class Anakin implements ReadOnlyAnakin {
 
     private final UniqueDeckList decks;
 
-    private boolean isInsideDeck;
     // Represent the current list of cards (when user get into a deck)
     private UniqueCardList cards;
 
     // Represents the list of cards displayed on the UI
     private UniqueCardList displayedCards;
 
+    private boolean isInsideDeck;
+
     // Boolean flag to indicate whether user is in deck review mode
     private boolean isReviewingDeck;
 
     // Manager to handle imports/exports
     private PortManager portManager;
+
+    private String lastCommand;
 
     /*
     * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -69,9 +70,6 @@ public class Anakin implements ReadOnlyAnakin {
      * {@code decks} must not contain duplicate decks.
      */
     public void setDecks(List<Deck> decks) {
-        if (isReviewingDeck()) {
-            throw new IllegalOperationWhileReviewingDeckException();
-        }
         this.decks.setDecks(decks);
     }
 
@@ -80,9 +78,6 @@ public class Anakin implements ReadOnlyAnakin {
      * {@code cards} must not contain duplicate cards.
      */
     public void setCards(List<Card> cards) {
-        if (isReviewingDeck()) {
-            throw new IllegalOperationWhileReviewingDeckException();
-        }
         this.cards.setCards(cards);
     }
 
@@ -91,12 +86,11 @@ public class Anakin implements ReadOnlyAnakin {
      */
     public void resetData(ReadOnlyAnakin newData) {
         requireNonNull(newData);
-
-        setIsInsideDeck(newData.isInsideDeck());
+        isInsideDeck = newData.isInsideDeck();
         setIsReviewingDeck(newData.isReviewingDeck());
-
         setDecks(newData.getDeckList());
         setCards(newData.getCardList());
+        lastCommand = newData.getLastCommand();
         updateDisplayedCards();
     }
 
@@ -104,20 +98,12 @@ public class Anakin implements ReadOnlyAnakin {
      * Sort the current list of decks/cards in alphabetical order.
      */
     public void sort() {
-        if (isReviewingDeck()) {
-            throw new IllegalOperationWhileReviewingDeckException();
-        }
-
         if (isInsideDeck()) {
             cards.sort();
             updateDisplayedCards();
         } else {
             decks.sort();
         }
-    }
-
-    public void setIsInsideDeck(boolean set) {
-        isInsideDeck = set;
     }
 
     public void updateDisplayedCards() {
@@ -131,9 +117,6 @@ public class Anakin implements ReadOnlyAnakin {
      */
     public void getIntoDeck(Deck deck) {
         requireNonNull(deck);
-        if (isReviewingDeck()) {
-            throw new IllegalOperationWhileReviewingDeckException();
-        }
         isInsideDeck = true;
         cards = deck.getCards();
         updateDisplayedCards();
@@ -143,9 +126,6 @@ public class Anakin implements ReadOnlyAnakin {
      * Navigating out of the current deck
      */
     public void getOutOfDeck() {
-        if (isReviewingDeck()) {
-            throw new IllegalOperationWhileReviewingDeckException();
-        }
         isInsideDeck = false;
         cards = new UniqueCardList();
         updateDisplayedCards();
@@ -153,7 +133,7 @@ public class Anakin implements ReadOnlyAnakin {
 
 
     /**
-     * Return true if user is inside a deck
+     * Return the current deck
      */
     @Override
     public boolean isInsideDeck() {
@@ -174,10 +154,7 @@ public class Anakin implements ReadOnlyAnakin {
      * Adds a deck to the Anakin.
      * The deck must not already exist in the Anakin.
      */
-    public void addDeck(Deck d) {
-        if (isReviewingDeck()) {
-            throw new IllegalOperationWhileReviewingDeckException();
-        }
+    public void addDeck(Deck d) throws DuplicateDeckException {
         decks.add(d);
     }
 
@@ -187,11 +164,7 @@ public class Anakin implements ReadOnlyAnakin {
      * The deck identity of {@code editedDeck} must not be the same as another existing deck in the Anakin.
      */
     public void updateDeck(Deck target, Deck editedDeck) {
-        if (isReviewingDeck()) {
-            throw new IllegalOperationWhileReviewingDeckException();
-        }
         requireNonNull(editedDeck);
-
         decks.setDeck(target, editedDeck);
     }
 
@@ -200,9 +173,6 @@ public class Anakin implements ReadOnlyAnakin {
      * {@code deck} must exist in the Anakin.
      */
     public void removeDeck(Deck deck) {
-        if (isReviewingDeck()) {
-            throw new IllegalOperationWhileReviewingDeckException();
-        }
         decks.remove(deck);
         if (deck.getCards().equals(cards)) {
             cards = new UniqueCardList();
@@ -217,7 +187,6 @@ public class Anakin implements ReadOnlyAnakin {
     public String exportDeck(Deck deck) {
         try {
             return portManager.exportDeck(deck);
-
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -229,7 +198,6 @@ public class Anakin implements ReadOnlyAnakin {
      * If there is an existing duplicate deck, throw DuplicateDeckException.
      * If there was a problem with the import action, throw DeckImportException
      */
-
     public Deck importDeck(String filepath) throws DuplicateDeckException, DeckImportException {
         Deck targetDeck = portManager.importDeck(filepath);
         if (decks.contains(targetDeck)) {
@@ -244,14 +212,7 @@ public class Anakin implements ReadOnlyAnakin {
      * Returns true if a card with the same identity as {@code card} exists in current deck.
      */
     public boolean hasCard(Card card) {
-        if (isReviewingDeck()) {
-            throw new IllegalOperationWhileReviewingDeckException();
-        }
-
         requireNonNull(card);
-        if (!isInsideDeck()) {
-            throw new DeckNotFoundException();
-        }
         return cards.contains(card);
     }
 
@@ -260,13 +221,6 @@ public class Anakin implements ReadOnlyAnakin {
      * The card must not already exist in the current deck.
      */
     public void addCard(Card c) {
-        if (isReviewingDeck()) {
-            throw new IllegalOperationWhileReviewingDeckException();
-        }
-
-        if (!isInsideDeck()) {
-            throw new DeckNotFoundException();
-        }
         cards.add(c);
         updateDisplayedCards();
     }
@@ -277,14 +231,7 @@ public class Anakin implements ReadOnlyAnakin {
      * The card identity of {@code editedCard} must not be the same as another existing card in the current deck.
      */
     public void updateCard(Card target, Card editedCard) {
-        if (isReviewingDeck()) {
-            throw new IllegalOperationWhileReviewingDeckException();
-        }
-
         requireNonNull(editedCard);
-        if (!isInsideDeck()) {
-            throw new DeckNotFoundException();
-        }
         cards.setCard(target, editedCard);
         updateDisplayedCards();
     }
@@ -294,13 +241,6 @@ public class Anakin implements ReadOnlyAnakin {
      * {@code key} must exist in the currentDeck.
      */
     public void removeCard(Card key) {
-        if (isReviewingDeck()) {
-            throw new IllegalOperationWhileReviewingDeckException();
-        }
-
-        if (!isInsideDeck()) {
-            throw new DeckNotFoundException();
-        }
         cards.remove(key);
         updateDisplayedCards();
     }
@@ -349,16 +289,15 @@ public class Anakin implements ReadOnlyAnakin {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(decks.asUnmodifiableObservableList().size() + " decks\n");
+        stringBuilder.append("ANAKIN: " + decks.asUnmodifiableObservableList().size() + " decks\n");
         Iterator<Deck> iterator = decks.iterator();
         while (iterator.hasNext()) {
             Deck cur = iterator.next();
-            stringBuilder.append(cur.toString() + ": ");
+            stringBuilder.append(cur.toString() + "\n");
             Iterator<Card> cardIterator = cur.getCards().iterator();
             while (cardIterator.hasNext()) {
-                stringBuilder.append(cardIterator.next().toString() + ", ");
+                stringBuilder.append("\t" + cardIterator.next().toString() + "\n");
             }
-            stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
@@ -371,6 +310,11 @@ public class Anakin implements ReadOnlyAnakin {
     @Override
     public ObservableList<Card> getCardList() {
         return displayedCards.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public String getLastCommand() {
+        return lastCommand;
     }
 
     @Override

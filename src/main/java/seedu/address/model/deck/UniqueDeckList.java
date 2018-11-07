@@ -48,7 +48,6 @@ public class UniqueDeckList implements Iterable<Deck> {
      */
     public void setDeck(Deck target, Deck editedDeck) {
         requireAllNonNull(target, editedDeck);
-
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new DeckNotFoundException();
@@ -57,7 +56,6 @@ public class UniqueDeckList implements Iterable<Deck> {
         if (!target.isSameDeck(editedDeck) && contains(editedDeck)) {
             throw new DuplicateDeckException();
         }
-
         internalList.set(index, editedDeck);
     }
 
@@ -93,8 +91,10 @@ public class UniqueDeckList implements Iterable<Deck> {
         if (!decksAreUnique(decks)) {
             throw new DuplicateDeckException();
         }
-
         internalList.setAll(decks);
+        for (int i = 0; i < decks.size(); i++) {
+            internalList.set(i, new Deck(decks.get(i)));
+        }
     }
 
     /**

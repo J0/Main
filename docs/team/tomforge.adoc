@@ -1,0 +1,71 @@
+= Foo Guo Wei - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Anakin
+
+---
+
+== Overview
+
+Anakin is a desktop application built to help people memorize things better by providing
+digital flash cards.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement:*
+
+** *Added the ability to track user performance*
+*** What it does: allows the user to classify reviewed cards into difficulty, as well as track the number of times a
+ card has been reviewed
+*** Justification: This feature paves the way for card scheduling based on user performance where cards that the user
+is struggling with will show up more often for review. This personalization is what truly differentiates Anakin as a
+smart flashcard manager.
+
+** *Implemented Storage component*
+*** What it does: The Storage component acts as the bridge between disk (file) storage and program memory. It allows
+Anakin state to be saved as an XML file and conversely, allows for loading of Anakin state from XML.
+*** Justification: This feature allows Anakin to be portable and persistent. It enables saving of user changes to
+disk such that the user will not lose all his data after closing the application.
+
+* *Minor enhancement:*
+
+** *Implement `newcard` command*: create a new card inside the current deck with the
+given question and answer.
+
+** *Implement `delcard` command*: delete a card inside the current deck given the index
+
+* *Other contributions*:
+
+** Wrote initial draft for Model interface
+** Wrote tests for Storage component
+
+** Documentation:
+*** Update developer guide
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T09-2/main/pull/146[#146],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/140[#140]
+*** Reported bugs and suggestions in the issue tracker of the project
+(Issues:  https://github.com/CS2103-AY1819S1-T09-2/main/issues/187[#187],
+ https://github.com/CS2103-AY1819S1-T09-2/main/issues/119[#119],
+ https://github.com/CS2103-AY1819S1-T09-2/main/issues/143[#143],
+ https://github.com/CS2103-AY1819S1-T09-2/main/issues/82[#82],
+ https://github.com/CS2103-AY1819S1-T09-2/main/issues/64[#64])
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===

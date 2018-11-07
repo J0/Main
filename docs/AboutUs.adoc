@@ -29,7 +29,7 @@ Role: Developer
 
 .Responsibilities:
 - Git expert
-- In charge of Model
+- In charge of Storage
 
 '''
 

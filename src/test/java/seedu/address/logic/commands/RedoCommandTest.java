@@ -37,11 +37,13 @@ public class RedoCommandTest {
     public void execute() {
         // multiple redoable states in model
         expectedModel.redoAnakin();
-        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_SUCCESS + DeleteDeckCommand.COMMAND_WORD, expectedModel);
 
         // single redoable state in model
         expectedModel.redoAnakin();
-        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_SUCCESS + DeleteDeckCommand.COMMAND_WORD, expectedModel);
 
         // no redoable state in model
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);

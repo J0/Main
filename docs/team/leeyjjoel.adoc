@@ -1,0 +1,94 @@
+= Lee Yi Jie, Joel - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+This portfolio outlines the contributions of Lee Yi Jie Joel to the following project(s).
+
+== PROJECT: Anakin
+
+---
+
+This project was completed during August 2018 to November 2018 as part of a Software Engineering module (CS2103T) in
+the National University of Singapore. The team comprises Tay Yu Jia, Joel Lee, Foo Guo Wei, David Goh and Nguyen
+Trong Truong Thanh.
+
+== Overview
+
+Anakin is a desktop-based flashcard application which makes remembering things easy. The user
+interacts with it using a CLI, and it has a GUI created with JavaFX. Its key selling points are the ability to replace
+traditional paper flashcards (thus saving the environment) and to provide an enhanced learning experience through the
+well-established spaced repetition learning method.
+
+It is written in Java, and has about 10 kLoC.
+
+* *Main features*:
+** Create decks of flashcards easily
+** Review your flashcards on the go
+** Track your performance for all flashcards
+** Import and export decks
+
+== Summary of contributions
+
+This section acts as a summary of the contributions made by Lee Yi Jie Joel to project Anakin.
+
+* *Major enhancement*: added *showDue* command as well as the scheduling algorithm behind it
+** What it does: allows the users to see cards which have been scheduled on a particular date  .
+** Justification: This feature improves the product significantly because a user will want to be able to look through
+ review cards based on how he has classified them
+** Highlights: This enhancement affects existing commands and commands to be added in future. While in the review
+mode, using the *supermemo2* spaced recognition algorithm, the student is saved from the hassle of seperating his/her flashcards
+into boxes based on how well he/she remembers them. This will allow for a better studying experience and in turn better recall for tests
+
+* *Minor enhancements*:
+** Help command which allows user to seek help when he/she is lost or initially starting out
+** Added systemtests to increase robustness of the application
+** Implemented a `editdeck` command that allows user to update the details of their deck.
+** Added an exit command to allow user to leave the deck
+** Added a `select` command which is now deprecated
+** Add `undo` and `redo` functions
+** Implement autocompletion function
+
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Set up Continuous Integration:
+https://github.com/CS2103-AY1819S1-T09-2/main/issues?q=is%3Aissue+is%3Aclosed+author%3Aleeyjjoel[List of created issues]
+*** Update contact us page (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/68[#68])
+*** Added initial documentation for team README (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/23[#23])
+*** Integrate reposense for code contribution tracking
+
+** Enhancements to existing features:
+*** Created system tests (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/158[#158])
+** Documentation:
+
+** Community:
+*** PRs reviewed (with non-trivial review comments):
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/189[#189]
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/195[#195]
+
+*** Discovered and reported bugs to peers:
+This is a work in progress
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=showDue]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=autocompleteimplementation]
+include::../DeveloperGuide.adoc[tag=decklevelcommands]
+
+

@@ -17,6 +17,9 @@ public class CardQuestionContainsKeywordsPredicate implements Predicate<Card> {
 
     @Override
     public boolean test(Card card) {
+        if (keywords.size() == 1) {
+            return card.getQuestion().toString().toLowerCase().contains(keywords.get(0).toLowerCase());
+        }
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(card.getQuestion().toString(), keyword));
     }

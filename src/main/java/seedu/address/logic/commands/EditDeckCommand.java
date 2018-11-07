@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_CURRENTLY_REVIEWING_DECK;
 import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_DECK;
 import static seedu.address.commons.core.Messages.MESSAGE_EDIT_DECK_SUCCESS;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DECK_LEVEL_OPERATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DECKS;
 
@@ -31,9 +33,12 @@ public class EditDeckCommand extends Command {
         + "by the index number used in the displayed deck list. "
         + "Changes its name to NAME.\n"
         + "Parameters: INDEX (must be a positive integer) "
-        + "[" + PREFIX_NAME + "NAME]...\n "
+        + "[" + PREFIX_NAME + "NAME]...\n"
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_NAME + "[NAME]";
+    public static final String DEFAULT_INDEX = "1";
+
+    public static final String AUTOCOMPLETE_TEXT = COMMAND_WORD + " " + DEFAULT_INDEX;
 
 
     private final Index index;
@@ -66,13 +71,22 @@ public class EditDeckCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Deck> lastShownList = model.getFilteredDeckList();
+        if (model.isReviewingDeck()) {
+            throw new CommandException(MESSAGE_CURRENTLY_REVIEWING_DECK);
+        }
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+
+        if (model.isInsideDeck()) {
+            throw new CommandException(MESSAGE_INVALID_DECK_LEVEL_OPERATION);
+        }
+
+        List<Deck> currentDeckList = model.getFilteredDeckList();
+
+        if (index.getZeroBased() >= currentDeckList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
         }
 
-        Deck deckToEdit = lastShownList.get(index.getZeroBased());
+        Deck deckToEdit = currentDeckList.get(index.getZeroBased());
         Deck editedDeck = createEditedDeck(deckToEdit, editDeckDescriptor);
 
         if (!deckToEdit.isSameDeck(editedDeck) && model.hasDeck(editedDeck)) {
@@ -81,7 +95,7 @@ public class EditDeckCommand extends Command {
 
         model.updateDeck(deckToEdit, editedDeck);
         model.updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
-        model.commitAnakin();
+        model.commitAnakin(COMMAND_WORD);
         return new CommandResult(String.format(MESSAGE_EDIT_DECK_SUCCESS, editedDeck));
     }
 

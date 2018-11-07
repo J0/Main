@@ -17,6 +17,9 @@ public class DeckNameContainsKeywordsPredicate implements Predicate<Deck> {
 
     @Override
     public boolean test(Deck deck) {
+        if (keywords.size() == 1) {
+            return deck.getName().toString().toLowerCase().contains(keywords.get(0).toLowerCase());
+        }
         return keywords.stream()
             .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(deck.getName().fullName, keyword));
     }

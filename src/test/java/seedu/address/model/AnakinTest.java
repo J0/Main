@@ -118,5 +118,10 @@ public class AnakinTest {
         public boolean isReviewingDeck() {
             return false;
         }
+
+        @Override
+        public String getLastCommand() {
+            return null;
+        }
     }
 }

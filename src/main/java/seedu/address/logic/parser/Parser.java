@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.ChangeDeckCommand;
+import seedu.address.logic.commands.ClassifyCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCardCommand;
@@ -128,6 +129,9 @@ public class Parser {
 
         case PreviousCardCommand.COMMAND_WORD:
             return new PreviousCardCommand();
+
+        case ClassifyCommand.COMMAND_WORD:
+            return new ClassifyCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

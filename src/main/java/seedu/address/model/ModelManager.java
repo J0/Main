@@ -14,7 +14,6 @@ import seedu.address.commons.events.model.AnakinChangedEvent;
 import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
 import seedu.address.model.deck.anakinexceptions.DeckNotFoundException;
-import seedu.address.storage.portmanager.PortManager;
 
 /**
  * Represents the in-memory model of Anakin data.
@@ -26,7 +25,6 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Deck> filteredDecks;
     // The filteredCards is not assigned. Should have methods to assign filteredCards (when user is inside a deck).
     private FilteredList<Card> filteredCards;
-    private PortManager portManager;
 
     /**
      * Initializes a ModelManager with the given Anakin and userPrefs.
@@ -109,7 +107,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void deleteCard(Card card) throws DeckNotFoundException {
+    public void deleteCard(Card card) {
         versionedAnakin.removeCard(card);
         indicateAnakinChanged();
     }
@@ -213,13 +211,11 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public ObservableList<Card> getFilteredCardList() {
-        // TODO: throws exception when user is not inside any decks
         return FXCollections.unmodifiableObservableList(filteredCards);
     }
 
     @Override
     public void updateFilteredCardList(Predicate<Card> predicate) {
-        // TODO: throws exception when user is not inside any decks
         requireAllNonNull(predicate);
         filteredCards.setPredicate(predicate);
     }
@@ -237,20 +233,22 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void undoAnakin() {
-        versionedAnakin.undo();
+    public String undoAnakin() {
+        String undoCommand = versionedAnakin.undo();
         indicateAnakinChanged();
+        return undoCommand;
     }
 
     @Override
-    public void redoAnakin() {
-        versionedAnakin.redo();
+    public String redoAnakin() {
+        String redoCommand = versionedAnakin.redo();
         indicateAnakinChanged();
+        return redoCommand;
     }
 
     @Override
-    public void commitAnakin() {
-        versionedAnakin.commit();
+    public void commitAnakin(String command) {
+        versionedAnakin.commit(command);
     }
 
     @Override

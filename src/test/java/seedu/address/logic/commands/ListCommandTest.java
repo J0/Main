@@ -1,11 +1,9 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showCardAtIndexOfCurrentDeck;
 import static seedu.address.logic.commands.CommandTestUtil.showDeckAtIndex;
 import static seedu.address.testutil.TypicalDecks.DECK_WITH_CARDS;
 import static seedu.address.testutil.TypicalDecks.getTypicalAnakin;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_DECK;
 
 import org.junit.Before;
@@ -50,7 +48,7 @@ public class ListCommandTest {
 
         model.getIntoDeck(DECK_WITH_CARDS);
         expectedModel.getIntoDeck(DECK_WITH_CARDS);
-        showCardAtIndexOfCurrentDeck(model, INDEX_FIRST_CARD);
+        //showCardAtIndexOfCurrentDeck(model, INDEX_FIRST_CARD);
         assertCommandSuccess(new ListCommand(), model, commandHistory,
                 ListCommand.MESSAGE_SUCCESS_CARD, expectedModel);
     }

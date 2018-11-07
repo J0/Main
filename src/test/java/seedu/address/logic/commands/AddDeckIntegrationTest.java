@@ -34,7 +34,7 @@ public class AddDeckIntegrationTest {
 
         Model expectedAnakinModel = new ModelManager(anakinModel.getAnakin(), new UserPrefs());
         expectedAnakinModel.addDeck(validDeck);
-        expectedAnakinModel.commitAnakin();
+        expectedAnakinModel.commitAnakin(NewDeckCommand.COMMAND_WORD);
 
         assertCommandSuccess(new NewDeckCommand(validDeck), anakinModel, commandHistory,
                 String.format(NewDeckCommand.MESSAGE_SUCCESS, validDeck), expectedAnakinModel);

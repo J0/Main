@@ -37,7 +37,7 @@ public class DeleteDeckCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
         expectedModel.deleteDeck(deckToDelete);
-        expectedModel.commitAnakin();
+        expectedModel.commitAnakin(DeleteDeckCommand.COMMAND_WORD);
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -62,7 +62,7 @@ public class DeleteDeckCommandTest {
 
         Model expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
         expectedModel.deleteDeck(deckToDelete);
-        expectedModel.commitAnakin();
+        expectedModel.commitAnakin(DeleteDeckCommand.COMMAND_WORD);
         showNoDeck(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);

@@ -4,41 +4,61 @@
     <cards>
         <question>An</question>
         <answer>Empty</answer>
+        <performance>NORMAL</performance>
+        <timesReviewed>0</timesReviewed>
     </cards>
     <cards>
         <question>Street</question>
         <answer>An</answer>
+        <performance>NORMAL</performance>
+        <timesReviewed>0</timesReviewed>
     </cards>
     <cards>
         <question>Empty</question>
         <answer>House</answer>
+        <performance>NORMAL</performance>
+        <timesReviewed>0</timesReviewed>
     </cards>
     <cards>
         <question>A</question>
         <answer>Hole</answer>
+        <performance>NORMAL</performance>
+        <timesReviewed>0</timesReviewed>
     </cards>
     <cards>
         <question>Inside</question>
         <answer>My</answer>
+        <performance>NORMAL</performance>
+        <timesReviewed>0</timesReviewed>
     </cards>
     <cards>
         <question>Heart</question>
         <answer>I am</answer>
+        <performance>NORMAL</performance>
+        <timesReviewed>0</timesReviewed>
     </cards>
     <cards>
         <question>All</question>
         <answer>Alone</answer>
+        <performance>NORMAL</performance>
+        <timesReviewed>0</timesReviewed>
     </cards>
     <cards>
         <question>A million</question>
         <answer>Default answer for default question lmao</answer>
+        <performance>NORMAL</performance>
+        <timesReviewed>0</timesReviewed>
     </cards>
     <cards>
         <question>dreams is</question>
         <answer>Default answer for default question lmao</answer>
+        <performance>NORMAL</performance>
+        <timesReviewed>0</timesReviewed>
     </cards>
     <cards>
         <question>all it's gonna take</question>
         <answer>Default answer for default question lmao</answer>
+        <performance>NORMAL</performance>
+        <timesReviewed>0</timesReviewed>
     </cards>
 </deck>

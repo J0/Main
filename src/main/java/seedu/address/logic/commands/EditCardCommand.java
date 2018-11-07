@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_CURRENTLY_REVIEWING_DECK;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_CARD_LEVEL_OPERATION;
 import static seedu.address.commons.core.Messages.MESSAGE_NOT_INSIDE_DECK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
@@ -39,6 +41,13 @@ public class EditCardCommand extends Command {
     public static final String MESSAGE_EDIT_CARD_SUCCESS = "Edited Card: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_CARD = "This card already exists in the deck.";
+    public static final String DEFAULT_INDEX = "1";
+    public static final String DEFAULT_QUESTION = "Why is Earth round?";
+
+
+    public static final String AUTOCOMPLETE_TEXT = COMMAND_WORD + " " + DEFAULT_INDEX + " "
+            + PREFIX_QUESTION + DEFAULT_QUESTION;
+
 
     private final Index index;
     private final EditCardDescriptor editCardDescriptor;
@@ -65,12 +74,20 @@ public class EditCardCommand extends Command {
         Question updatedQuestion = editCardDescriptor.getQuestion().orElse(cardToEdit.getQuestion());
         Answer updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
 
-        return new Card(updatedQuestion, updatedAnswer);
+        return new Card(updatedQuestion, updatedAnswer, cardToEdit.getPerformance(), cardToEdit.getTimesReviewed());
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        if (model.isReviewingDeck()) {
+            throw new CommandException(MESSAGE_CURRENTLY_REVIEWING_DECK);
+        }
+
+        if (!model.isInsideDeck()) {
+            throw new CommandException(MESSAGE_INVALID_CARD_LEVEL_OPERATION);
+        }
+
         List<Card> lastShownList = model.getFilteredCardList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -87,12 +104,11 @@ public class EditCardCommand extends Command {
         try {
             model.updateCard(cardToEdit, editedCard);
             model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
-            model.commitAnakin();
+            model.commitAnakin(COMMAND_WORD);
         } catch (DeckNotFoundException e) {
             throw new CommandException(MESSAGE_NOT_INSIDE_DECK);
         }
 
-        // TODO: Check that card changes are saved when committing
         return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, editedCard));
     }
 

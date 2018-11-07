@@ -68,9 +68,6 @@ public class PortManager implements Porter {
         try {
             XmlExportableDeck xmlDeck = loadDeckFromFile(filepath);
             return getImportedDeck(xmlDeck);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw new DeckImportException(String.format(MESSAGE_FILEPATH_INVALID, filepath));
         } catch (DataConversionException e) {
             e.printStackTrace();
             throw new DeckImportException(MESSAGE_IMPORTED_DECK_INVALID);
@@ -82,13 +79,13 @@ public class PortManager implements Porter {
      * Returns a XmlExportableDeck object.
      */
 
-    private XmlExportableDeck loadDeckFromFile(Path filepath) throws FileNotFoundException {
+    private XmlExportableDeck loadDeckFromFile(Path filepath) throws DeckImportException {
         XmlExportableDeck xmlDeck;
         try {
             xmlDeck = XmlUtil.getDataFromFile(filepath, XmlExportableDeck.class);
             return xmlDeck;
         } catch (FileNotFoundException e) {
-            throw new FileNotFoundException();
+            throw new DeckImportException(String.format(MESSAGE_FILEPATH_INVALID, filepath));
         } catch (Exception e) {
             e.printStackTrace();
             throw new AssertionError("Unexpected exception " + e.getMessage(), e);

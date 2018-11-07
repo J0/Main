@@ -1,0 +1,103 @@
+= Tay Yu Jia - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+This portfolio outlines the contributions of Tay Yu Jia to the following project(s).
+
+== PROJECT: Anakin
+
+---
+
+This project was completed during August 2018 to November 2018 as part of a Software Engineering module (CS2103T) in
+the National University of Singapore. The team comprises Tay Yu Jia, Joel Lee, Foo Guo Wei, David Goh and Nguyen
+Trong Truong Thanh.
+
+== Overview
+
+Anakin is a desktop-based flashcard application which makes remembering things easy. The user
+interacts with it using a CLI, and it has a GUI created with JavaFX. Its key selling points are the ability to replace
+traditional paper flashcards (thus saving the environment) and to provide an enhanced learning experience through the
+well-established spaced repetition learning method.
+
+It is written in Java, and has about 10 kLoC.
+
+* *Main features*:
+** Create decks of flashcards easily
+** Review your flashcards on the go
+** Track your performance for all flashcards
+** Import and export decks
+
+== Summary of contributions
+
+This section acts as a summary of the contributions made by Tay Yu Jia to project Anakin.
+
+* *Major enhancement*: added *the ability to review decks*
+** What it does: allows the user to review the flashcards in the deck one by one.
+** Justification: This feature improves the product significantly because a user will want to be able to look through
+ his flashcards stored in our application. It is also important to be able to view the question and answer
+ separately as this is used as a revision tool.
+** Highlights: This enhancement affects existing commands and commands to be added in future. While in the review
+mode, the user is not allowed to make any changes to his decks and cards, except for classifying his performance for
+each card. The implementation of this enhancement involves notable UI changes to switch out the screen for editing
+decks with a different screen specially created for reviewing flashcards.
+
+* *Minor enhancements*:
+** Enhanced UI component by introducing a new screen for reviewing flashcards and adding a panel for displaying
+flashcards in decks.
+** Implemented a `editcard` command that allows user to update the details of their flashcard which include the
+question and answer.
+** Successfully integrated the different components of the application (i.e. Model, Logic, Storage and UI) and produced
+ the first working prototype.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Created and tracked issues:
+https://github.com/CS2103-AY1819S1-T09-2/main/issues?utf8=%E2%9C%93&q=is%3Aissue+author%3Ayujiatay+-label%3Atype.bug+[List of created issues]
+** Enhancements to existing features:
+*** Updated the GUI color scheme (Pull requests https://github.com/CS2103-AY1819S1-T09-2/main/pull/77[#77],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/178[#178])
+*** Created tests for UI component (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/137[#137])
+*** Refined system tests (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/179[#179])
+** Documentation:
+*** Improved documentation through adding more details and reformatting. (Pull requests
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/34[#34],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/113[#113],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/118[#118],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/183[#183],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/184[#184])
+** Community:
+*** PRs reviewed (with non-trivial review comments):
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/30[#30]
+*** Discovered and reported bugs to peers:
+https://github.com/CS2103-AY1819S1-T09-2/main/issues/99[#99],
+https://github.com/CS2103-AY1819S1-T09-2/main/issues/101[#101],
+https://github.com/CS2103-AY1819S1-T09-2/main/issues/102[#102],
+https://github.com/CS2103-AY1819S1-T09-2/main/issues/151[#151],
+https://github.com/CS2103-AY1819S1-T09-2/main/issues/153[#153],
+https://github.com/CS2103-AY1819S1-T09-2/main/issues/174[#174]
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=review]
+
+include::../UserGuide.adoc[tag=editcard]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=deckreview]
+
+include::../DeveloperGuide.adoc[tag=uicomponent]
+
+include::../DeveloperGuide.adoc[tag=uichanges]

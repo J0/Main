@@ -1,0 +1,133 @@
+= Truong Thanh - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Anakin
+
+---
+
+== Overview
+Anakin is a desktop  application built to help people memorize things better by providing
+digital flash cards.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Code contributed:* https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=truongthanh2606[GitHub]
+
+* *Major enhancements:*
+** *Re-design and implement the model component*
+
+*** What can the new model do:
+
+**** Allows Anakin to have a list of decks, each deck contains a card list with questions and answers.
+**** Allows UI to observe both the deck list and card list so that it can update its deck panel and
+card panel when these lists are modified (executing commands).
+**** Allows Logic component to execute its set of commands by providing a Model interface,
+which can support the logic of those operations.
+
+*** Justification:
+The new model component determines how objects like deck and card interacts with each other and
+ manipulate the state of the application.
+
+** *Implement `find` command*
+
+*** What can `find` command do:
+**** Search for decks by name if user is under the home directory.
+**** Search for cards by question if user is inside a deck.
+
+*** Justification: This allows user to locate the deck or card that contains specific keywords
+ quickly.
+
+* *Minor enhancements:*
+
+** *Add messages to `undo` and `redo` commands*
+
+*** What is the new messages: The `undo` and `redo` messages will show which command has
+just been `undo`, or `redo`.
+*** Justification: This provides user more transparent view of the commands being executed.
+
+** *Implement `sort` command*
+
+*** What can `sort` command do:
+**** Sort the current deck list in lexicographical order.
+**** Sort the current card list in lexicographical order if user is inside a deck.
+
+*** Justification: This allows user to manage their data better and to find
+ deck or card easily.
+
+ ** *Implement `newdeck` command*
+
+
+* *Other contributions*:
+
+** Wrote tests for model component
+(Pull requests https://github.com/CS2103-AY1819S1-T09-2/main/pull/130[#130])
+** Wrote additional classes for test util
+(Pull requests https://github.com/CS2103-AY1819S1-T09-2/main/pull/122/files[#122])
+
+** Enhancements to existing features:
+*** Wrote additional tests for existing features to increase coverage from 79.5% to 84%
+(Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/192[#192])
+** Documentation:
+*** Update developer guide (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/91[#91],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/195[#195],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/199[#199])
+*** Update user guide (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/164[#164],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/195[#195])
+
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T09-2/main/pull/165[#165],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/189[#189]
+*** Reported bugs and suggestions in the issue tracker of the project
+(Issues:  https://github.com/CS2103-AY1819S1-T09-2/main/issues/161[#161],
+ https://github.com/CS2103-AY1819S1-T09-2/main/issues/162[#162] fixed by PR https://github.com/CS2103-AY1819S1-T09-2/main/pull/171[#171],
+ https://github.com/CS2103-AY1819S1-T09-2/main/issues/163[#163],
+ https://github.com/CS2103-AY1819S1-T09-2/main/issues/191[#191],
+ https://github.com/CS2103-AY1819S1-T09-2/main/issues/193[#193],
+ https://github.com/CS2103-AY1819S1-T09-2/main/issues/219[#219] fixed by PR
+ https://github.com/CS2103-AY1819S1-T09-2/main/pull/243[#243])
+*** Resolved issues suggested by other team members and other groups in the issue tracker of the project
+(Pull request: https://github.com/CS2103-AY1819S1-T09-2/main/pull/156[#156],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/164[#164],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/209[#209] resolved issue https://github.com/CS2103-AY1819S1-T09-2/main/issues/203[#203],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/218[#218] resolved issue
+https://github.com/CS2103-AY1819S1-T09-2/main/issues/211[#211],
+https://github.com/CS2103-AY1819S1-T09-2/main/issues/212[#212],
+https://github.com/CS2103-AY1819S1-T09-2/main/issues/213[#213],
+https://github.com/CS2103-AY1819S1-T09-2/main/issues/214[#214],
+https://github.com/CS2103-AY1819S1-T09-2/main/issues/217[#217])
+
+
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=newdeck]
+
+include::../UserGuide.adoc[tag=sort]
+
+include::../UserGuide.adoc[tag=rank]
+
+include::../UserGuide.adoc[tag=find]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=modelcomponent]
+
+include::../DeveloperGuide.adoc[tag=cardleveloperation]
+
+include::../DeveloperGuide.adoc[tag=handleinvalidcommands]
+
+include::../DeveloperGuide.adoc[tag=keepcardspanelupdatedbyui]
+

@@ -18,6 +18,8 @@ public class NextCardCommand extends Command {
 
     public static final String COMMAND_WORD = "nextcard";
     public static final String MESSAGE_SUCCESS = "Moving to next question";
+    public static final String AUTOCOMPLETE_TEXT = COMMAND_WORD;
+
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {

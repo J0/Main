@@ -14,7 +14,6 @@ https://travis-ci.org/CS2103-AY1819S1-T09-2/main?branch=master[image:https://tra
 https://ci.appveyor.com/project/leeyjjoel/main/branch/master[image:https://ci.appveyor.com/api/projects/status/qjfbm4fqjffl8ujk/branch/master?svg=true[Build status]]
 https://coveralls.io/github/CS2103-AY1819S1-T09-2/main?branch=master[image:https://coveralls.io/repos/github/CS2103-AY1819S1-T09-2/main/badge.svg?branch=master[Coverage Status]]
 https://www.codacy.com/app/leeyjjoel/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103-AY1819S1-T09-2/main&amp;utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/1bb58958c22c473dbf75c560d5b71612[Codacy Badge]]
-https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
 
 Anakin is a spaced repetition flashcard program which makes remembering things easy.

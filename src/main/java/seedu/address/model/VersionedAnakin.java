@@ -11,6 +11,9 @@ public class VersionedAnakin extends Anakin {
     private final List<ReadOnlyAnakin> anakinStateList;
     private int currentStatePointer;
 
+    // The command that causes Anakin's state to be changed
+    private String lastCommand;
+
     public VersionedAnakin(ReadOnlyAnakin initialState) {
         super(initialState);
 
@@ -22,11 +25,18 @@ public class VersionedAnakin extends Anakin {
     /**
      * Saves a copy of the current {@code Anakin} state at the end of the state list.
      * Undone states are removed from the state list.
+     * @param command
      */
-    public void commit() {
+    public void commit(String command) {
+        lastCommand = command;
         removeStatesAfterCurrentPointer();
         anakinStateList.add(new Anakin(this));
         currentStatePointer++;
+    }
+
+    @Override
+    public String getLastCommand() {
+        return lastCommand;
     }
 
     private void removeStatesAfterCurrentPointer() {
@@ -36,25 +46,28 @@ public class VersionedAnakin extends Anakin {
     /**
      * Restores the address book to its previous state.
      */
-    public void undo() {
+    public String undo() {
         if (!canUndo()) {
             throw new NoUndoableStateException();
         }
+        String undoCommand = anakinStateList.get(currentStatePointer).getLastCommand();
         currentStatePointer--;
         resetData(anakinStateList.get(currentStatePointer));
         updateDisplayedCards();
+        return undoCommand;
     }
 
     /**
      * Restores the address book to its previously undone state.
      */
-    public void redo() {
+    public String redo() {
         if (!canRedo()) {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
         resetData(anakinStateList.get(currentStatePointer));
         updateDisplayedCards();
+        return anakinStateList.get(currentStatePointer).getLastCommand();
     }
 
     /**

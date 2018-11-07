@@ -26,6 +26,7 @@
                 </Label>
                 <Label fx:id="question" text="\$first" styleClass="cell_big_label" />
             </HBox>
+            <Label fx:id="difficulty" text="\$difficulty" styleClass="cell_small_label" />
         </VBox>
     </GridPane>
 </HBox>

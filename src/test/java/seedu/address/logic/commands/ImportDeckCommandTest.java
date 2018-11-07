@@ -35,7 +35,7 @@ public class ImportDeckCommandTest {
 
 
     @Test
-    public void importDeck_successs() throws Exception {
+    public void importDeck_success() throws Exception {
         Model testModel = new ModelAlwaysImports();
         Deck deckToImport = DECK_WITH_CARDS;
         ImportDeckCommand importCommand = new ImportDeckCommand("Unused");
@@ -191,23 +191,23 @@ public class ImportDeckCommandTest {
         }
 
         @Override
-        public void undoAnakin() {
+        public String undoAnakin() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAnakin() {
+        public String redoAnakin() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAnakin() {
+        public void commitAnakin(String command) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean isInsideDeck() {
-            throw new AssertionError("This method should not be called.");
+            return false;
         }
 
         @Override
@@ -240,7 +240,12 @@ public class ImportDeckCommandTest {
         }
 
         @Override
-        public void commitAnakin() {
+        public boolean isReviewingDeck() {
+            return false;
+        }
+
+        @Override
+        public void commitAnakin(String command) {
             // called by {@code ImportDeckCommand#execute()}
         }
 
@@ -255,7 +260,12 @@ public class ImportDeckCommandTest {
         }
 
         @Override
-        public void commitAnakin() {
+        public boolean isReviewingDeck() {
+            return false;
+        }
+
+        @Override
+        public void commitAnakin(String command) {
             // called by {@code ImportDeckCommand#execute()}
         }
     }
@@ -269,7 +279,12 @@ public class ImportDeckCommandTest {
         }
 
         @Override
-        public void commitAnakin() {
+        public boolean isReviewingDeck() {
+            return false;
+        }
+
+        @Override
+        public void commitAnakin(String command) {
             // called by {@code ImportDeckCommand#execute()}
         }
     }

@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
 import seedu.address.model.deck.Name;
+import seedu.address.model.deck.Performance;
 
 /**
  * A utility class containing a list of {@code Card} objects to be used in tests.
@@ -24,6 +25,9 @@ public class TypicalCards {
     public static final Card MILLION = new CardBuilder().withQuestion("A million").build();
     public static final Card IS = new CardBuilder().withQuestion("dreams is").build();
     public static final Card ALL = new CardBuilder().withQuestion("all it's gonna take").build();
+
+    public static final Card CARD_A_WITH_META = new CardBuilder().withQuestion("An").withAnswer("Empty")
+            .withPerformance(Performance.EASY).withTimesReviewed(5).build();
 
     private TypicalCards() {
     } // prevents instantiation

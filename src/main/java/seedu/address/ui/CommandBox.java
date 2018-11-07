@@ -13,6 +13,7 @@ import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Autocompleter;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -55,8 +56,25 @@ public class CommandBox extends UiPart<Region> {
             keyEvent.consume();
             navigateToNextInput();
             break;
+        case TAB:
+            keyEvent.consume();
+            autocomplete();
+            break;
         default:
             // let JavaFx handle the keypress
+        }
+    }
+
+    /**
+     * Checks if {@code commandBox}'s commandTextField has a potential autocompletable command word,
+     * if there exists such a word, it is replaced with the relevant autocompletion command.
+     */
+    private void autocomplete() {
+        String commandText = commandTextField.getText();
+
+        if (Autocompleter.isAutocompletable(commandText)) {
+            replaceText(Autocompleter.getAutocompletion(commandText));
+
         }
     }
 

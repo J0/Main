@@ -16,6 +16,8 @@ public class FlipCardCommand extends Command {
 
     public static final String COMMAND_WORD = "flipcard";
     public static final String MESSAGE_SUCCESS = "Card flipped!";
+    public static final String AUTOCOMPLETE_TEXT = COMMAND_WORD;
+
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {

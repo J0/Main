@@ -22,7 +22,7 @@ public interface ReadOnlyAnakin {
     ObservableList<Card> getCardList();
 
     /**
-     * Returns the state
+     * Returns true if user is inside a deck.
      */
     boolean isInsideDeck();
 
@@ -30,4 +30,9 @@ public interface ReadOnlyAnakin {
      * @return boolean of whether deck is being reviewed.
      */
     boolean isReviewingDeck();
+
+    /**
+     * @return string represents the last commands that commits Anakin
+     */
+    String getLastCommand();
 }

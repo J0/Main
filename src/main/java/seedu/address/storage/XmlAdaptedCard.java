@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.deck.Answer;
 import seedu.address.model.deck.Card;
+import seedu.address.model.deck.Performance;
 import seedu.address.model.deck.Question;
 
 /**
@@ -20,6 +21,11 @@ public class XmlAdaptedCard {
     private String question;
     @XmlElement(required = true)
     private String answer;
+    @XmlElement
+    private String performance;
+    @XmlElement
+    private int timesReviewed = 0;
+
 
     /**
      * Constructs an XmlAdaptedCard.
@@ -36,6 +42,13 @@ public class XmlAdaptedCard {
         this.answer = answer;
     }
 
+    public XmlAdaptedCard(String question, String answer, String performance, int timesReviewed) {
+        this.question = question;
+        this.answer = answer;
+        this.performance = performance;
+        this.timesReviewed = timesReviewed;
+    }
+
     /**
      * Converts a given Card into this class for JAXB use.
      *
@@ -44,6 +57,8 @@ public class XmlAdaptedCard {
     public XmlAdaptedCard(Card source) {
         question = source.getQuestion().fullQuestion;
         answer = source.getAnswer().fullAnswer;
+        performance = source.getPerformance().toString();
+        timesReviewed = source.getTimesReviewed();
     }
 
     /**
@@ -54,7 +69,7 @@ public class XmlAdaptedCard {
     public Card toModelType() throws IllegalValueException {
         if (question == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                Question.class.getSimpleName()));
+                    Question.class.getSimpleName()));
         }
         if (!Question.isValidQuestion(question)) {
             throw new IllegalValueException(Question.MESSAGE_QUESTION_CONSTRAINTS);
@@ -64,7 +79,7 @@ public class XmlAdaptedCard {
 
         if (answer == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                Answer.class.getSimpleName()));
+                    Answer.class.getSimpleName()));
         }
         if (!Answer.isValidAnswer(answer)) {
             throw new IllegalValueException(Answer.MESSAGE_ANSWER_CONSTRAINTS);
@@ -72,7 +87,12 @@ public class XmlAdaptedCard {
 
         final Answer cardAnswer = new Answer(answer);
 
-        return new Card(cardQuestion, cardAnswer);
+        Performance cardPerformance = Performance.NORMAL;
+        if (Performance.isValidPerformance(performance)) {
+            cardPerformance = Performance.type(performance);
+        }
+
+        return new Card(cardQuestion, cardAnswer, cardPerformance, timesReviewed);
     }
 
     @Override
@@ -87,6 +107,8 @@ public class XmlAdaptedCard {
 
         XmlAdaptedCard otherCard = (XmlAdaptedCard) other;
         return Objects.equals(question, otherCard.question)
-            && Objects.equals(answer, otherCard.answer);
+                && Objects.equals(answer, otherCard.answer)
+                && Objects.equals(performance, otherCard.performance)
+                && Objects.equals(timesReviewed, otherCard.timesReviewed);
     }
 }

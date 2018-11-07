@@ -100,6 +100,7 @@ Each of the four components
 
 The sections below give more details of each component.
 
+// tag::uicomponent[]
 === UI component
 
 .Structure of the UI Component
@@ -107,18 +108,22 @@ image::AnakinUIClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `DeckListPanel`,
-`CardListPanel`, `StatusBarFooter`, `PreviewPanel` etc. All these, including the `MainWindow`, inherit from the
-abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `DeckEditScreen`,
+`DeckReviewScreen`, `StatusBarFooter` etc. The `DeckEditScreen` is in turn made up of `DeckListPanel` and
+`CardListPanel` and the `DeckReviewScreen` is made up of `DeckReviewCard`. All these, including the `MainWindow`,
+inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
-The `UI` component,
+The `UI` component
 
 * Executes user commands using the `Logic` component.
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
+* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` changes.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
+// end::uicomponent[]
 
+
+// tag::logic[]
 === Logic component
 
 image::AnakinLogicClassDiagram.png[width="700", align="left"]
@@ -136,9 +141,9 @@ The 'Logic' component:
 The `LogicManager` contains an `AnakinModel`, an `AnakinParser`, and a `CommandHistory`.
 
 When a string input by the user is parsed by `AnakinParser`, it creates a new `AnakinCommand` of the appropriate type with the relevant arguments (based on parser tokens). Each `AnakinCommand` has its own Class. `LogicManager` will call `execute` on the command object. If successful, `LogicManager` will modify `Model` accordingly. Regardless of success, `LogicManager` will update `CommandHistory` with the `CommandResult`.
+// end::logic[]
 
-
-
+// tag::modelcomponent[]
 === Model component
 
 image::AnakinModelClassDiagram.png[width="900", align="left"]
@@ -148,10 +153,14 @@ Structure of the Model Component
 The `Model`,
 
 ****
-* stores Anakin data.
-* exposes an unmodifiable ObservableList<Deck> and ObservableList<Card> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores Anakin's data and manipulates the state of the application.
+* provides a Model interface for Logic component to execute its set of commands.
+* manages the interaction and relationship between different objects (Anakin, Card, Deck, ...)
+* exposes an unmodifiable ObservableList<Deck> and ObservableList<Card> that can be 'observed'
+e.g. the UI is bound to these lists so that the UI automatically updates when the data in the lists change.
 * does not depend on any of the other three components.
 ****
+// end::modelcomponent[]
 
 === Storage component
 
@@ -169,6 +178,7 @@ The `Storage` component,
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::cardleveloperation[]
 === Card-level operations
 
 ==== Current implementation
@@ -208,6 +218,42 @@ image::NewcardSequenceDiagram.png[width="790", align="left"]
 ** Pros: The responsibility of each class is clear, only a Deck can modify its list of cards.
 ** Cons: The logic for executing deck-level and card-level commands are implemented at different places. We must ensure that the implementation of each command is correct.
 
+// end::cardleveloperation[]
+
+// tag::handleinvalidcommands[]
+=== Handle invalid commands
+
+==== Current implementation
+
+* Deck-level operations (`newdeck`, `editdeck`, `deldeck`, `exportdeck`, `importdeck`)
+ are disabled when user is inside a deck.
+* These commands are blocked while executing commands (in Logic component) by
+checking the state of Anakin through Model interface.
+
+==== Design consideration
+
+* *Alternative 1 (current choice):* Implement the logic of command-checking in
+Logic component
+
+** Pros:
+*** Reduce possible bugs caused by executing deck-level commands while inside
+a deck.
+*** Model component handles less invalid commands.
+*** Exceptions are thrown and handled inside Logic components instead of being passed
+from Model to Logic.
+** Cons: Increase coupling between Logic and Model component.
+
+* *Alternative 2:* Handle all commands logic in Model component
+
+** Pros: Lower degree of dependency between Logic and Model (aka low coupling), thus
+make the process of maintenance, integration and testing easier.
+** Cons: Model has to check for invalid commands according to its
+state
+
+// end::handleinvalidcommands[]
+
+// tag::deckleveloperations[]
+
 === Deck-level operations
 
 ==== Current implementation
@@ -246,22 +292,104 @@ image::NewDeck.png[width="790", align="left"]
 
 ** Pros: The responsibility of each class is clear, only a Deck can modify its list of cards.
 ** Cons: The logic for executing deck-level and card-level commands are implemented at different places. We must ensure that the implementation of each command is correct.
+// end::deckleveloperations[]
+
+// tag::deckreview[]
+=== Deck Review Implementation
+
+==== Current Implementation
+
+The deck review mechanism is facilitated by `Anakin` from Model, the `MainWindow` and `DeckReviewScreen` from UI and
+the EventsCenter.
+
+It implements the following operations:
+
+* `Anakin#isReviewingDeck()` - Checks if user is in review mode.
+* `Anakin#startReview()` - Starts a review.
+* `Anakin#endReview()` - Ends a review.
+* `Anakin#getIndexOfCurrentCard()` - Retrieves the index of the last known reviewed card.
+* `Anakin#setIndexOfCurrentCard()` - Updates the index of the last known reviewed card.
+
+These operations are exposed in the Model interface as `Model#isReviewingDeck()`, `Model#startReview()`,
+`Model#endReview()`, `Model#getIndexOfCurrentCard()` and `Model#setIndexOfCurrentCard` respectively.
+
+Also, it is supported by the following commands from Logic:
+
+* `review` - Starts the review of a selected deck
+* `endreview` - End the review
+* `nextcard` - Moves to the subsequent card in the deck
+* `prevcard` - Moves to the previous card in the deck
+* `flipcard` - Flips the current card to display either the question or the answer
+
+Furthermore, it posts the following events to trigger changes in UI:
+
+* `StartReviewRequestEvent(Card card)`
+* `FlipCardRequestEvent()`
+* `ReviewNextCardEvent(Card nextCard)`
+* `ReviewPreviousCardEvent(Card prevCard)`
+* `EndReviewRequestEvent()`
+
+Given below is an example usage scenario and how the deck review mechanism behaves at each step.
+
+Step 1. The user launches the application and he already has a deck of cards that he wants to review. He executes
+`review 1` command to review the first deck on the list.
+
+The `review` command calls `Model#getIntoDeck(Deck deck)` and subsequently `Model#startReview()`, which updates the
+`isReviewingDeck` boolean in `Anakin` to true. Also, the command calls `Model#getFilteredCardList()` and
+`Model#getIndexOfCurrentCard()` to retrieve the `Card` object of the last reviewed card. Thereafter, it posts a
+`StartReviewRequestEvent(Card card)` with the EventsCenter. `MainWindow`, on the UI side, subscribes to this event
+and switches `DeckEditScreen` with `DeckReviewScreen` by reordering the nodes in `mainAreaPlaceholder`, which is a
+JavaFX StackPane.
+
+Step 2. The user sees the question displayed on the first card and comes up with his own answer. To verify his
+answer, he executes the `flipcard` command. The command posts a `FlipCardRequestEvent` with EventsCenter and
+`DeckReviewScreen` is notified of the event and switches the card with the question with the other card displaying
+the answer. This is also achieved by reordering the nodes in a StackPane but this time in `reviewAreaPlaceholder`. As
+a result, the user is presented with the answer to the question.
+
+Step 3. The user wants to go to the next card and executes `nextcard` command. This calls `Model#getFilteredCardList
+()` and `Model#getIndexOfCurrentCard()` and increments the index by one. The command reassigns the index a value of 0
+if the incremented index is equals to the size of the list of cards. This is to ensure that calling `nextcard` on the
+last card of the deck will loop back to the first card. Using the `Card` object found at the new index, the command
+posts a `ReviewNextCardEvent` using EventsCenter and notifies `DeckReviewScreen` of the event. `DeckReviewScreen`
+uses the `Card` object to create question and answer `DeckReviewCard`s and replaces the currently displayed cards
+with these two new ones.
+
+Step 4. If the user wants to go back to review a previous card, he executes `prevcard` command. The explanation
+of the process is similar to Step 3.
+
+Step 5. When the user is done, he executes `endreview` to quit review mode. The command posts a
+`EndReviewRequestEvent` using EventsCenter and notifies `MainWindow`. `MainWindow` switches the `DeckEditScreen` back
+ to the front by reordering the nodes in `mainAreaPlaceholder` and the user is able to edit his decks again.
+
+==== Design Considerations
+
+===== Aspect: Tracking index of current card
+
+* **Alternative 1 (current choice):** Store a `currentIndex` field in `UniqueCardList`
+** Pros: Easy to implement and complies with separation of concerns. Can also easily saved in Storage.
+** Cons: Introducing state to `UniqueCardList` may not be the best solution.
+* **Alternative 2:** Store `currentCardIndex` in `Anakin`
+** Pros: Convenient access to field by exposing method in `Model`
+** Cons: Field is not required by many operations in `Anakin` and its use case is specific to deck reviews.
+
+// end::deckreview[]
 
 === Performance Tracking Implementation
 
-==== Proposed Implementation (v1.3)
+==== Current Implementation (v1.3)
 
-The user can assign to a card a difficulty after reviewing it in "play" mode. Users can only do this assignment on
-the card they are currently reviewing, as it is the only time it makes sense.
+The user can assign to a card a difficulty after reviewing it in "review" mode. Users can only do this assignment on
+the card they are currently reviewing, as it is the only time it makes sense. By default, all cards are assigned the
+`normal` difficulty.
 
-The command available to the user will be `classify [DIFFICULTY_TEXT]`, where `DIFFICULTY_TEXT` is any of the strings
- `easy`, `good`, `hard`, and `review`, corresponding to the respective levels of perceived difficulty of that
- flashcard (`review` refers to flagging for immediate review, and that card will be automatically assigned a
- difficulty of `hard`).
+The command available to the user will be `classify DIFFICULTY`, where `DIFFICULTY` is any of the strings
+ `easy`, `normal`, `hard`, corresponding to the level of perceived difficulty for that
+ flashcard.
 
 Given below is an example usage scenario for the performance tracking feature.
 
-Step 1. The user requests to "play" a deck. He sees a card A (question only) from the deck.
+Step 1. The user requests to "review" a deck. He sees a card A (question only) from the deck.
 
 Step 2. The user requests to see the answer. He sees the answer displayed with the question.
 
@@ -271,19 +399,18 @@ Step 4. The user continues reviewing the rest of the cards in the deck.
 
 Step 5. Card A is shown to the user more regularly when he reviews the same deck in the future.
 
-
+// tag::uichanges[]
 === UI implementation
 
-==== Current implementation (v1.2)
+==== Previous implementation (v1.2)
 
-The UI for Anakin at v1.2 splits the main area into three sections:
+The UI for Anakin at v1.2 split the main area into three sections:
 
  * (Left) List of decks
- * (Center) List of cards in selected deck
- * (Right) Preview area for the selected card
+ * (Right) List of cards in selected deck
 
-This was implemented by morphing PersonListPanel and PersonListCard into our use cases for decks and cards and
-editing MainWindow to render changes in both decks and cards.
+This was implemented by morphing `PersonListPanel` and `PersonListCard` into our use cases for decks and cards and
+editing `MainWindow` to render changes in both decks and cards.
 
 Given below is an example usage scenario and how the lists are displayed at each step.
 
@@ -298,17 +425,29 @@ that of the second deck.
 
 Step 4. The user executes `cd ..` command to navigate out of the second deck. The CardListPanel is empty again.
 
+==== Current implementation (v1.3)
+
+The UI for Anakin was revamped in v1.3. Previously in v1.2, the application had a list of decks and list of cards on
+its main view `MainWindow`. In v1.3, the panels displaying these lists have been refactored into `DeckEditScreen`.
+This is because of the addition of `DeckReviewScreen` which acts as the user interface when users are reviewing a
+deck. When the user starts reviewing a deck, `MainWindow` will swap `DeckEditScreen` with `DeckReviewScreen` to show
+the correct UI. The `DeckReviewScreen` displays a `DeckReviewCard` at a time, as the user is going through his
+flashcards. It also boasts of the ability to flip the card to display questions and answers separately, and iterate
+to subsequent and previous cards in the deck. See Deck Review Implementation for an example use case.
+
 ==== Design considerations
 
 * *Alternative 1 (current choice):* Display deck and card lists side by side
-
 ** Pros: Easy to implement
 ** Cons: Somewhat lacking in aesthetics
 
 * *Alternative 2:* Display deck and card list in the same panel and switch out accordingly
-
-** Pros: Looks more impressive in UI-wise,
+** Pros: Looks more impressive in UI-wise
 ** Cons: Have to implement a switch event to toggle items inside StackPane
+// end::uichanges[]
+
+
+// tag::keepcardspanelupdatedbyui[]
 
 === Keep cards panel updated by UI
 
@@ -342,6 +481,35 @@ an event (CardListChangedEvent), which is subscribed by UI, then UI can re-assig
 and update the cards panel accordingly
 ** Pros: Better performance
 ** Cons: Need to re-design Model and UI components
+// end::keepcardspanelupdatedbyui[]
+
+// tag::importexportimplementation[]
+=== Import/Export Implementation
+==== Current implementation (v1.3)
+
+Imports and exports in Anakin are managed by a PortManager.
+
+PortManager will contain a `java.nio Path` that files will be exported to. By default it is the same folder that Anakin is located in.
+Exporting a `Deck` will convert it to an `XmlExportableDeck`
+Upon creation, Model will initialize a PortManager. When an ExportCommand or ImportCommand is executed, it will call the Model's importDeck or exportDeck method.
+
+
+==== Design considerations
+
+* *Alternative 1 (current choice):* Have Model contain a PortManager class to manage imports and export.
+** Explanation: Commands pass arguments to Model, which passes arguments to its PortManager.
+In the case of ExportCommand, the `Deck` to be exported is passed from Command to Model to PortManager.
+PortManager returns a `String` of the export location, which is passed to Model, then passed to the Command for printing. +
+
+** Pros: Better modularity
+** Cons: Have to pass messages through many layers and methods.
+
+* *Alternative 2:* Have Model itself manage imports and exports
+
+** Pros: Less message passing between layers
+** Cons: Worse modularity and Separation of Concerns.
+
+// end::importexportimplementation[]
 
 === Logging
 
@@ -357,7 +525,31 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 * `WARNING` : Can continue, but with caution
 * `INFO` : Information showing the noteworthy actions by the App
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
+// tag::autocompleteimplementation[]
+=== Autocomplete Implementation
+==== Current implementation (v1.4)
 
+Autocompletion in Anakin is handled by an Autocompleter.
+
+On pressing tab, CommandBox will raise an event and check if the current text in the command box is autocompletable, that is to say, it is a prefix of one of the existing commands supported by Anakin.
+If it is Autocompletable, Autocompleter will search through the list of existing commands in lexicographic order and find the first match for the current text in the command box.
+
+
+==== Design considerations
+
+* *Alternative 1 (current choice):* Use a set of pre-decided completion text for each command and have a list of all supported command words
+** Explanation: Each command has a pre-decided autocompletion text and we do prefix-matching between the text in the command box and our existing set of command words.
+If there is a potential match, we replace the current text in the command box with the autocompletion text of the supported command which it is matched to.
+
+** Pros: Better modularity
+** Cons: Less customizability. This design doesn't take into account the past commands that the user has issued.
+
+* *Alternative 2:* Match current command against the history of previously executed commands
+
+** Pros: Better prediction of intended command
+** Cons: Worse modularity and Separation of Concerns as the autocompleter would need to interact with the history and thus the state of the model.
+
+// end::autocompleteimplementation[]
 [[Implementation-Configuration]]
 === Configuration
 

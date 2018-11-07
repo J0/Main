@@ -19,7 +19,7 @@ public class ClearCommandTest {
     public void execute_emptyAnakin_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
-        expectedModel.commitAnakin();
+        expectedModel.commitAnakin(ClearCommand.COMMAND_WORD);
 
         assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS,
                 expectedModel);
@@ -30,7 +30,7 @@ public class ClearCommandTest {
         Model model = new ModelManager(getTypicalAnakin(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAnakin(), new UserPrefs());
         expectedModel.resetData(new Anakin());
-        expectedModel.commitAnakin();
+        expectedModel.commitAnakin(ClearCommand.COMMAND_WORD);
 
         assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS,
                 expectedModel);

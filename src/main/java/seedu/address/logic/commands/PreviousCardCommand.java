@@ -18,6 +18,8 @@ public class PreviousCardCommand extends Command {
 
     public static final String COMMAND_WORD = "prevcard";
     public static final String MESSAGE_SUCCESS = "Moving to previous question";
+    public static final String AUTOCOMPLETE_TEXT = COMMAND_WORD;
+
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {

@@ -77,9 +77,9 @@ public interface Model {
 
     boolean canRedoAnakin();
 
-    void undoAnakin();
+    String undoAnakin();
 
-    void redoAnakin();
+    String redoAnakin();
 
-    void commitAnakin();
+    void commitAnakin(String command);
 }

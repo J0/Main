@@ -22,13 +22,17 @@ public class ReviewCommand extends Command {
 
     public static final String COMMAND_WORD = "review";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reviews a deck inside Anakin. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reviews a deck inside Anakin.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_SUCCESS = "Deck review started: %1$s";
     public static final String MESSAGE_DECK_NO_CARDS = "Cannot review deck with no cards";
     public static final String MESSAGE_ALREADY_REVIEWING_DECK = "End current deck review before reviewing another deck";
+    public static final String DEFAULT_INDEX = "1";
+
+    public static final String AUTOCOMPLETE_TEXT = COMMAND_WORD + " " + DEFAULT_INDEX;
+
 
     private final Index index;
 
@@ -48,13 +52,13 @@ public class ReviewCommand extends Command {
             throw new CommandException(MESSAGE_ALREADY_REVIEWING_DECK);
         }
 
-        List<Deck> lastShownList = model.getFilteredDeckList();
+        List<Deck> currentDeckList = model.getFilteredDeckList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= currentDeckList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
         }
 
-        Deck targetDeck = lastShownList.get(index.getZeroBased());
+        Deck targetDeck = currentDeckList.get(index.getZeroBased());
         model.getIntoDeck(targetDeck);
 
         ObservableList<Card> cardList = model.getFilteredCardList();

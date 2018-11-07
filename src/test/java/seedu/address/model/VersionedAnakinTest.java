@@ -17,6 +17,9 @@ import org.junit.Test;
 import seedu.address.testutil.AnakinBuilder;
 
 public class VersionedAnakinTest {
+
+    private static final String DEFAULT_COMMIT_MESSAGE = "Default commit message";
+
     private final ReadOnlyAnakin anakinWithDeckA = new AnakinBuilder().withDeck(DECK_A).build();
     private final ReadOnlyAnakin anakinWithDeckB = new AnakinBuilder().withDeck(DECK_B).build();
     private final ReadOnlyAnakin anakinWithDeckC = new AnakinBuilder().withDeck(DECK_C).build();
@@ -26,7 +29,7 @@ public class VersionedAnakinTest {
     public void commit_singleAnakin_noStatesRemovedCurrentStateSaved() {
         VersionedAnakin versionedAnakin = prepareAnakinList(emptyAnakin);
 
-        versionedAnakin.commit();
+        versionedAnakin.commit(DEFAULT_COMMIT_MESSAGE);
         assertAnakinListStatus(versionedAnakin,
             Collections.singletonList(emptyAnakin),
             emptyAnakin,
@@ -38,7 +41,7 @@ public class VersionedAnakinTest {
         VersionedAnakin versionedAnakin = prepareAnakinList(
             emptyAnakin, anakinWithDeckA, anakinWithDeckB);
 
-        versionedAnakin.commit();
+        versionedAnakin.commit(DEFAULT_COMMIT_MESSAGE);
         assertAnakinListStatus(versionedAnakin,
             Arrays.asList(emptyAnakin, anakinWithDeckA, anakinWithDeckB),
             anakinWithDeckB,
@@ -51,7 +54,7 @@ public class VersionedAnakinTest {
             emptyAnakin, anakinWithDeckA, anakinWithDeckB);
         shiftCurrentStatePointerLeftwards(versionedAnakin, 2);
 
-        versionedAnakin.commit();
+        versionedAnakin.commit(DEFAULT_COMMIT_MESSAGE);
         assertAnakinListStatus(versionedAnakin,
             Collections.singletonList(emptyAnakin),
             emptyAnakin,
@@ -280,7 +283,7 @@ public class VersionedAnakinTest {
         VersionedAnakin versionedAnakin = new VersionedAnakin(anakinStates[0]);
         for (int i = 1; i < anakinStates.length; i++) {
             versionedAnakin.resetData(anakinStates[i]);
-            versionedAnakin.commit();
+            versionedAnakin.commit(DEFAULT_COMMIT_MESSAGE);
         }
 
         return versionedAnakin;

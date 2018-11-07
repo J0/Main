@@ -7,6 +7,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.deck.Answer;
 import seedu.address.model.deck.Name;
+import seedu.address.model.deck.Performance;
 import seedu.address.model.deck.Question;
 
 /**
@@ -32,7 +33,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String name} into a {@code Name}.
-     * Leading and trailing whitespaces will be trimmed. NEEDS TO CHANGE TO ANAKIN_NAME
+     * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -71,5 +72,20 @@ public class ParserUtil {
             throw new ParseException(Answer.MESSAGE_ANSWER_CONSTRAINTS);
         }
         return new Answer(trimmed);
+    }
+
+    /**
+     * Parses a {@code String performance} into a {@code Performance}
+     *
+     * @throws ParseException
+     */
+    public static Performance parsePerformance(String performance) throws ParseException {
+        requireNonNull(performance);
+        String trimmed = performance.trim();
+        try {
+            return Performance.type(trimmed);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Performance.MESSAGE_PERFORMANCE_CONSTRAINTS);
+        }
     }
 }

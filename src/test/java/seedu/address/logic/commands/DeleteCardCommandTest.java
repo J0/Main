@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalDecks.getTypicalAnakinInDeck;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CARD;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -25,8 +26,12 @@ import seedu.address.model.deck.Card;
 public class DeleteCardCommandTest {
 
     private Model model = new ModelManager(getTypicalAnakinInDeck(), new UserPrefs());
-
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Before
+    public void getIntoFirstDeck() {
+        model.getIntoDeck(model.getFilteredDeckList().get(0));
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -37,7 +42,7 @@ public class DeleteCardCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
         expectedModel.deleteCard(cardToDelete);
-        expectedModel.commitAnakin();
+        expectedModel.commitAnakin(DeleteCardCommand.COMMAND_WORD);
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -54,7 +59,6 @@ public class DeleteCardCommandTest {
     @Test
     public void execute_validIndexFilteredList_success() {
         //showCardAtIndex(model, INDEX_FIRST_CARD);
-
         Card cardToDelete = model.getFilteredCardList().get(INDEX_FIRST_CARD.getZeroBased());
         DeleteCardCommand deleteCommand = new DeleteCardCommand(INDEX_FIRST_CARD);
 
@@ -62,7 +66,7 @@ public class DeleteCardCommandTest {
 
         Model expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
         expectedModel.deleteCard(cardToDelete);
-        expectedModel.commitAnakin();
+        expectedModel.commitAnakin(DeleteCardCommand.COMMAND_WORD);
         showNoCard(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);

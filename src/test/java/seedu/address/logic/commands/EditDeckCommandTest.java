@@ -48,7 +48,7 @@ public class EditDeckCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
         expectedModel.updateDeck(model.getFilteredDeckList().get(0), editedDeck);
-        expectedModel.commitAnakin();
+        expectedModel.commitAnakin(EditDeckCommand.COMMAND_WORD);
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -69,7 +69,7 @@ public class EditDeckCommandTest {
 
         Model expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
         expectedModel.updateDeck(lastDeck, editedDeck);
-        expectedModel.commitAnakin();
+        expectedModel.commitAnakin(EditDeckCommand.COMMAND_WORD);
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -82,7 +82,7 @@ public class EditDeckCommandTest {
         String expectedMessage = String.format(MESSAGE_EDIT_DECK_SUCCESS, editedDeck);
 
         ModelManager expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
-        expectedModel.commitAnakin();
+        expectedModel.commitAnakin(EditDeckCommand.COMMAND_WORD);
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -100,7 +100,7 @@ public class EditDeckCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
         expectedModel.updateDeck(model.getFilteredDeckList().get(0), editedDeck);
-        expectedModel.commitAnakin();
+        expectedModel.commitAnakin(EditDeckCommand.COMMAND_WORD);
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -162,7 +162,7 @@ public class EditDeckCommandTest {
         EditDeckCommand editCommand = new EditDeckCommand(INDEX_FIRST_DECK, descriptor);
         ModelManager expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
         expectedModel.updateDeck(deckToEdit, editedDeck);
-        expectedModel.commitAnakin();
+        expectedModel.commitAnakin(EditDeckCommand.COMMAND_WORD);
 
         // edit -> first deck edited
         editCommand.execute(model, commandHistory);
@@ -170,12 +170,12 @@ public class EditDeckCommandTest {
         // undo -> reverts anakin back to previous state and filtered deck list to show all decks
         expectedModel.undoAnakin();
         assertCommandSuccess(new UndoCommand(), model, commandHistory,
-            seedu.address.logic.commands.UndoCommand.MESSAGE_SUCCESS, expectedModel);
+            UndoCommand.MESSAGE_SUCCESS + EditDeckCommand.COMMAND_WORD, expectedModel);
 
         // redo -> same first deck edited again
         expectedModel.redoAnakin();
         assertCommandSuccess(new RedoCommand(), model, commandHistory,
-            seedu.address.logic.commands.RedoCommand.MESSAGE_SUCCESS, expectedModel);
+            seedu.address.logic.commands.RedoCommand.MESSAGE_SUCCESS + EditDeckCommand.COMMAND_WORD, expectedModel);
     }
 
     @Test
@@ -213,7 +213,7 @@ public class EditDeckCommandTest {
         showDeckAtIndex(model, INDEX_SECOND_DECK);
         Deck deckToEdit = model.getFilteredDeckList().get(INDEX_FIRST_DECK.getZeroBased());
         expectedModel.updateDeck(deckToEdit, editedDeck);
-        expectedModel.commitAnakin();
+        expectedModel.commitAnakin(EditDeckCommand.COMMAND_WORD);
 
         // edit -> edits second deck in unfiltered deck list / first deck in filtered deck list
         editCommand.execute(model, commandHistory);
@@ -221,13 +221,13 @@ public class EditDeckCommandTest {
         // undo -> reverts anakin back to previous state and filtered deck list to show all decks
         expectedModel.undoAnakin();
         assertCommandSuccess(new seedu.address.logic.commands.UndoCommand(), model, commandHistory,
-            seedu.address.logic.commands.UndoCommand.MESSAGE_SUCCESS, expectedModel);
+            UndoCommand.MESSAGE_SUCCESS + EditDeckCommand.COMMAND_WORD, expectedModel);
 
         assertNotEquals(model.getFilteredDeckList().get(INDEX_FIRST_DECK.getZeroBased()), deckToEdit);
         // redo -> edits same second deck in unfiltered deck list
         expectedModel.redoAnakin();
         assertCommandSuccess(new RedoCommand(), model, commandHistory,
-            seedu.address.logic.commands.RedoCommand.MESSAGE_SUCCESS, expectedModel);
+            seedu.address.logic.commands.RedoCommand.MESSAGE_SUCCESS + EditDeckCommand.COMMAND_WORD, expectedModel);
     }
 
     @Test

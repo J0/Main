@@ -24,6 +24,12 @@ public class Deck {
         }
     }
 
+    public Deck(Deck other) {
+        this.name = new Name(other.name.toString());
+        this.cards = new UniqueCardList();
+        this.cards.setCards(other.getCards());
+    }
+
     public Name getName() {
         return name;
     }

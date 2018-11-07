@@ -10,6 +10,7 @@ import java.util.Objects;
 public class Card {
 
     private final Performance performance;
+    private final int timesReviewed;
 
     // Identity fields
     private final Question question;
@@ -19,14 +20,27 @@ public class Card {
         requireAllNonNull(question, answer);
         this.question = question;
         this.answer = answer;
-        this.performance = Performance.DEFAULT;
+        performance = Performance.NORMAL;
+        timesReviewed = 0;
     }
-    
-    public Card(Question question, Answer answer, Performance performance ) {
+
+    public Card(Question question, Answer answer, Performance performance, int timesReviewed) {
+        requireAllNonNull(question, answer, performance, timesReviewed);
         this.question = question;
         this.answer = answer;
         this.performance = performance;
+        this.timesReviewed = timesReviewed;
+    }
 
+    public Card(Card other) {
+        this.question = new Question(other.getQuestion().toString());
+        this.answer = new Answer(other.getAnswer().toString());
+        this.performance = other.performance;
+        this.timesReviewed = other.timesReviewed;
+    }
+
+    public static Card classifyCard(Card card, Performance performance) {
+        return new Card(card.question, card.answer, performance, card.timesReviewed + 1);
     }
 
     public Question getQuestion() {
@@ -39,6 +53,10 @@ public class Card {
 
     public Performance getPerformance() {
         return performance;
+    }
+
+    public int getTimesReviewed() {
+        return timesReviewed;
     }
 
     /**
@@ -74,9 +92,9 @@ public class Card {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Question: ")
-            .append(question)
-            .append(" Answer: ")
-            .append(answer);
+                .append(question)
+                .append(" Answer: ")
+                .append(answer);
         return builder.toString();
     }
 }

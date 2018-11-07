@@ -245,23 +245,23 @@ public class NewCardCommandTest {
         }
 
         @Override
-        public void undoAnakin() {
+        public String undoAnakin() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAnakin() {
+        public String redoAnakin() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAnakin() {
+        public void commitAnakin(String command) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean isInsideDeck() {
-            throw new AssertionError("This method should not be called.");
+            return true;
         }
 
         @Override
@@ -297,6 +297,11 @@ public class NewCardCommandTest {
             requireNonNull(card);
             return this.card.isSameCard(card);
         }
+
+        @Override
+        public boolean isReviewingDeck() {
+            return false;
+        }
     }
 
     /**
@@ -318,7 +323,12 @@ public class NewCardCommandTest {
         }
 
         @Override
-        public void commitAnakin() {
+        public boolean isReviewingDeck() {
+            return false;
+        }
+
+        @Override
+        public void commitAnakin(String command) {
             // called by {@code NewCardCommand#execute()}
         }
 

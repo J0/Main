@@ -46,7 +46,7 @@ public class DeleteCommandSystemTest extends AnakinSystemTest {
 
         /* Case: undo deleting the last deck in the list -> last person restored */
         command = UndoCommand.COMMAND_WORD;
-        expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
+        expectedResultMessage = UndoCommand.MESSAGE_SUCCESS + DeleteDeckCommand.COMMAND_WORD;
         assertCommandSuccess(command, anakinModelBeforeDeletingLast, expectedResultMessage);
 
         //        /* Case: redo deleting the last Deck in the list -> last deck deleted again */
