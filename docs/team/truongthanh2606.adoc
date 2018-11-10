@@ -8,10 +8,9 @@
 ---
 
 == Overview
-Anakin is a desktop  application built to help people memorize things better by providing
-digital flash cards.
-The user interacts with it using a CLI, and it has a GUI created with JavaFX.
-It is written in Java, and has about 10 kLoC.
+This project was completed during August 2018 to November 2018 as part of a Software Engineering module (CS2103T) in
+the National University of Singapore. The team comprises Tay Yu Jia, Joel Lee, Foo Guo Wei, David Goh and Nguyen
+Trong Truong Thanh.
 
 == Summary of contributions
 
@@ -65,10 +64,10 @@ just been `undo`, or `redo`.
 
 ** Wrote tests for model component
 (Pull requests https://github.com/CS2103-AY1819S1-T09-2/main/pull/130[#130])
-** Wrote additional classes for test util
-(Pull requests https://github.com/CS2103-AY1819S1-T09-2/main/pull/122/files[#122])
 
-** Enhancements to existing features:
+** Enhancement to existing features:
+*** Wrote additional classes for test util
+(Pull requests https://github.com/CS2103-AY1819S1-T09-2/main/pull/122/files[#122])
 *** Wrote additional tests for existing features to increase coverage from 79.5% to 84%
 (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/192[#192])
 ** Documentation:
@@ -91,14 +90,17 @@ https://github.com/CS2103-AY1819S1-T09-2/main/pull/189[#189]
  https://github.com/CS2103-AY1819S1-T09-2/main/pull/243[#243])
 *** Resolved issues suggested by other team members and other groups in the issue tracker of the project
 (Pull request: https://github.com/CS2103-AY1819S1-T09-2/main/pull/156[#156],
-https://github.com/CS2103-AY1819S1-T09-2/main/pull/164[#164],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/164[#164] resolved issue https://github.com/CS2103-AY1819S1-T09-2/main/issues/161[#161],
 https://github.com/CS2103-AY1819S1-T09-2/main/pull/209[#209] resolved issue https://github.com/CS2103-AY1819S1-T09-2/main/issues/203[#203],
 https://github.com/CS2103-AY1819S1-T09-2/main/pull/218[#218] resolved issue
 https://github.com/CS2103-AY1819S1-T09-2/main/issues/211[#211],
 https://github.com/CS2103-AY1819S1-T09-2/main/issues/212[#212],
 https://github.com/CS2103-AY1819S1-T09-2/main/issues/213[#213],
 https://github.com/CS2103-AY1819S1-T09-2/main/issues/214[#214],
-https://github.com/CS2103-AY1819S1-T09-2/main/issues/217[#217])
+https://github.com/CS2103-AY1819S1-T09-2/main/issues/217[#217],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/258[#258] resolved issue
+https://github.com/CS2103-AY1819S1-T09-2/main/issues/228[#228],
+https://github.com/CS2103-AY1819S1-T09-2/main/issues/249[#249])
 
 
 

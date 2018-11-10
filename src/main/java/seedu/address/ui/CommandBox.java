@@ -72,10 +72,10 @@ public class CommandBox extends UiPart<Region> {
     private void autocomplete() {
         String commandText = commandTextField.getText();
 
-        if (Autocompleter.isAutocompletable(commandText)) {
-            replaceText(Autocompleter.getAutocompletion(commandText));
-
+        if (!Autocompleter.isAutocompletable(commandText)) {
+            return;
         }
+        replaceText(Autocompleter.getAutocompletion(commandText));
     }
 
     /**

@@ -21,6 +21,7 @@ import seedu.address.model.deck.CardQuestionContainsKeywordsPredicate;
 import seedu.address.model.deck.Deck;
 import seedu.address.model.deck.DeckNameContainsKeywordsPredicate;
 import seedu.address.model.deck.Performance;
+import seedu.address.testutil.DeckBuilder;
 import seedu.address.testutil.EditDeckDescriptorBuilder;
 import seedu.address.testutil.TypicalCards;
 
@@ -35,6 +36,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_DECK_A = "My Deck A";
     public static final String VALID_NAME_DECK_B = "Your deck";
+    public static final Deck VALID_DECK_A = new DeckBuilder().withName(VALID_NAME_DECK_A).build();
+    public static final Deck VALID_DECK_B = new DeckBuilder().withName(VALID_NAME_DECK_B).build();
 
     public static final String VALID_DECK_NAME_A_ARGS = " " + PREFIX_NAME + VALID_NAME_DECK_A;
     public static final String VALID_DECK_NAME_B_ARGS = " " + PREFIX_NAME + VALID_NAME_DECK_B;

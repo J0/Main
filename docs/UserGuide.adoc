@@ -119,6 +119,8 @@ Format: `newdeck n/NAME`
 
 ****
 * This deck will contains an empty list of cards.
+* This operation is disabled when user is currently inside a deck.
+* If multiple arguments are given (i.e. `newdeck n/My First Deck n/My Second Deck` only the last valid argument is accepted for each respective field.
 * User should be under Anakin's deck list to perform this operation (not inside any decks).
 ****
 
@@ -135,6 +137,8 @@ Format: `editdeck INDEX_OF_DECK n/NAME`
 ****
 * INDEX_OF_DECK must be a positive integer from 1 onwards and is based on the currently displayed list.
 * The new deck will maintain the card list of the old one.
+* This operation is disabled when user navigates into a deck.
+* If multiple arguments are given (i.e. `editdeck 1 n/My First Deck n/My Second Deck` only the last valid argument is accepted for each respective field.
 * User should be under Anakin's deck list to perform this operation (not inside any decks).
 ****
 
@@ -224,6 +228,7 @@ Format: `review INDEX_OF_DECK`
 * INDEX_OF_DECK must be a positive integer from 1 onwards and is based on the currently displayed list.
 * While in review mode, disable commands that operate on decks and cards (except: `endreview`,
 `flipcard`, ``nextcard, `prevcard`, `help`, `history`, `exit`).
+* The application's data will only be stored after execute `endreview` command.
 ****
 
 === Flip a card in a review : `flipcard`
@@ -243,7 +248,7 @@ Views the subsequent card in the deck. +
 Format: `nextcard`
 
 ****
-* When you are at the last card of the deck, executing `nextcard` will loop back to the first card.
+* Note: When you are at the last card of the deck, executing `nextcard` will loop back to the first card.
 ****
 
 === Go to the previous card in a review : `prevcard`
@@ -251,12 +256,18 @@ Views the previous card in the deck. +
 Format: `prevcard`
 
 ****
-* When you are at the first card of the deck, executing `prevcard` will loop back to the last card.
+* Note: When you are at the first card of the deck, executing `prevcard` will loop back to the last card.
 ****
 
 === Exit review mode : `endreview`
 Exits the review and returns to the editing menu +
 Format: `endreview`
+
+****
+* Note: Executing `undo` after reviewing will undo all the changes made in that review session
+(all `classify` commands).
+****
+
 // end::review[]
 
 === Card difficulty classification : `classify`
@@ -424,7 +435,7 @@ Exits the program. +
 Format: `exit`
 
 // start::autocompletion[]
-=== Autocompletion : Hit `<TAB>``
+=== Autocompletion : Hit `<TAB>`
 
 Provides autocompletion for existing text. If there is an available autocompletion for the text in the textbox then hitting <TAB> will replace the text in the command box with the autocompletion text of the existing command
 which is lexicographically closest to what is in the text box. If the command box is empty autocompletion will default to ``cd 1``. Unfortunately, this feature does not work with trailing or preceeding whitespace currently.

@@ -12,7 +12,6 @@ import seedu.address.model.deck.UniqueCardList;
 import seedu.address.model.deck.UniqueDeckList;
 import seedu.address.model.deck.anakinexceptions.DeckImportException;
 import seedu.address.model.deck.anakinexceptions.DuplicateDeckException;
-import seedu.address.model.deck.anakinexceptions.NotReviewingDeckException;
 import seedu.address.storage.portmanager.PortManager;
 
 /**
@@ -264,23 +263,14 @@ public class Anakin implements ReadOnlyAnakin {
      * Concludes the end of a deck review by setting isReviewingDeck flag to false
      */
     public void endReview() {
-        if (!isReviewingDeck()) {
-            throw new NotReviewingDeckException();
-        }
         isReviewingDeck = false;
     }
 
     public int getIndexOfCurrentCard() {
-        if (!isReviewingDeck()) {
-            throw new NotReviewingDeckException();
-        }
         return cards.getCurrentIndex();
     }
 
     public void setIndexOfCurrentCard(int newIndex) {
-        if (!isReviewingDeck()) {
-            throw new NotReviewingDeckException();
-        }
         cards.setCurrentIndex(newIndex);
     }
 

@@ -24,6 +24,7 @@ import seedu.address.logic.commands.ImportDeckCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NewCardCommand;
 import seedu.address.logic.commands.NewDeckCommand;
+import seedu.address.logic.commands.NextCardCommand;
 import seedu.address.logic.commands.PreviousCardCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ReviewCommand;
@@ -113,27 +114,12 @@ public class Autocompleter {
         commandClasses.add(ListCommand.class);
         commandClasses.add(NewCardCommand.class);
         commandClasses.add(NewDeckCommand.class);
+        commandClasses.add(NextCardCommand.class);
         commandClasses.add(PreviousCardCommand.class);
         commandClasses.add(RedoCommand.class);
         commandClasses.add(ReviewCommand.class);
         commandClasses.add(SortCommand.class);
         commandClasses.add(UndoCommand.class);
-
-
-        //        for (File file : fList) {
-        //            // Check if file is file
-        //            if (file.isFile()) {
-        //                String fileName = file.getName();
-        //                if (fileName.endsWith("Command")) {
-        //                    try {
-        //                        commandClasses.add(Class.forName(fileName));
-        //                    } catch (ClassNotFoundException e) {
-        //
-        //                    }
-        //                }
-        //            }
-        //        }
-        //
         return commandClasses;
 
     }

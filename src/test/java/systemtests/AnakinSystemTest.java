@@ -18,7 +18,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
-import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.DeckListPanelHandle;
 import guitests.guihandles.MainMenuHandle;
@@ -34,8 +33,6 @@ import seedu.address.model.Anakin;
 import seedu.address.model.Model;
 import seedu.address.testutil.TypicalDecks;
 import seedu.address.ui.CommandBox;
-
-
 
 /**
  * A system test class for Anakin, which provides access to handles of GUI components and helper methods
@@ -170,8 +167,7 @@ public abstract class AnakinSystemTest {
     }
 
     /**
-     * Calls {@code BrowserPanelHandle}, {@code PersonListPanelHandle} and {@code StatusBarFooterHandle} to remember
-     * their current state.
+     * Calls {@code DeckListPanelHandle} and {@code StatusBarFooterHandle} to remember their current state.
      */
     private void rememberStates() {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
@@ -184,7 +180,6 @@ public abstract class AnakinSystemTest {
      * Asserts that the previously selected card is now deselected and the browser's url remains displaying the
  details
      * of the previously selected person.
-     * @see BrowserPanelHandle#isUrlChanged()
      */
     protected void assertSelectedCardDeselected() {
         assertFalse(getDeckListPanel().isAnyCardSelected());
@@ -202,7 +197,6 @@ public abstract class AnakinSystemTest {
 
     /**
      * Asserts that the browser's url and the selected card in the person list panel remain unchanged.
-     * @see BrowserPanelHandle#isUrlChanged()
      * @see DeckListPanelHandle#isSelectedDeckCardChanged()
      */
     protected void assertSelectedCardUnchanged() {

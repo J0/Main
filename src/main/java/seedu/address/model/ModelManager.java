@@ -81,12 +81,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void deleteDeck(Deck deck) {
+        LOGGER.info("Deleted a deck.");
         versionedAnakin.removeDeck(deck);
         indicateAnakinChanged();
     }
 
     @Override
     public void addDeck(Deck deck) {
+        LOGGER.info("Added a new deck to Anakin.");
         versionedAnakin.addDeck(deck);
         updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
         indicateAnakinChanged();
@@ -95,7 +97,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateDeck(Deck target, Deck editedDeck) {
         requireAllNonNull(target, editedDeck);
-
+        LOGGER.info("Updated a deck's name in Anakin.");
         versionedAnakin.updateDeck(target, editedDeck);
         indicateAnakinChanged();
     }
@@ -108,6 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void deleteCard(Card card) {
+        LOGGER.info("Deleted a card in the current deck.");
         versionedAnakin.removeCard(card);
         indicateAnakinChanged();
     }
@@ -115,6 +118,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addCard(Card card) throws DeckNotFoundException {
         versionedAnakin.addCard(card);
+        LOGGER.info("Added a card to the current deck.");
         updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
         indicateAnakinChanged();
     }
@@ -122,14 +126,15 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateCard(Card target, Card editedCard) throws DeckNotFoundException {
         requireAllNonNull(target, editedCard);
-
         versionedAnakin.updateCard(target, editedCard);
+        LOGGER.info("Updated a card in the current deck.");
         indicateAnakinChanged();
     }
 
     @Override
     public void getIntoDeck(Deck deck) {
         requireAllNonNull(deck);
+        LOGGER.info("Got into a deck.");
         versionedAnakin.getIntoDeck(deck);
         updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
         indicateAnakinChanged();
@@ -137,6 +142,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void getOutOfDeck() {
+        LOGGER.info("Got out of the current deck, back to Anakin's deck list.");
         versionedAnakin.getOutOfDeck();
         updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
         indicateAnakinChanged();
@@ -154,12 +160,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void startReview() {
+        LOGGER.info("Starting reviewing...");
         versionedAnakin.startReview();
         indicateAnakinChanged();
     }
 
     @Override
     public void endReview() {
+        LOGGER.info("Ended review mode.");
         versionedAnakin.endReview();
         indicateAnakinChanged();
     }
@@ -177,11 +185,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public String exportDeck(Deck deck) {
+        LOGGER.info("Exported a deck.");
         return versionedAnakin.exportDeck(deck);
     }
 
     @Override
     public Deck importDeck (String filepath) {
+        LOGGER.info("Imported a deck from xml file.");
         Deck imported = versionedAnakin.importDeck(filepath);
         addDeck(imported);
         return imported;
@@ -234,6 +244,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public String undoAnakin() {
+        LOGGER.info("Undo Anakin, reset the application to the previous state.");
         String undoCommand = versionedAnakin.undo();
         indicateAnakinChanged();
         return undoCommand;
@@ -241,6 +252,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public String redoAnakin() {
+        LOGGER.info("Redo Anakin, reset the application to the state before the previous `undo` command.");
         String redoCommand = versionedAnakin.redo();
         indicateAnakinChanged();
         return redoCommand;
@@ -248,6 +260,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void commitAnakin(String command) {
+        LOGGER.info("Committed Anakin");
         versionedAnakin.commit(command);
     }
 

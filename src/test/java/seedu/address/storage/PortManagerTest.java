@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.commons.core.Messages.MESSAGE_FILEPATH_INVALID;
+import static seedu.address.commons.core.Messages.MESSAGE_IMPORTED_DECK_INVALID;
 import static seedu.address.testutil.TypicalDecks.DECK_WITH_CARDS;
 
 import java.nio.file.Path;
@@ -14,6 +16,7 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
+import seedu.address.model.deck.anakinexceptions.DeckImportException;
 import seedu.address.storage.portmanager.PortManager;
 import seedu.address.testutil.DeckBuilder;
 
@@ -44,6 +47,39 @@ public class PortManagerTest {
         String testFilePath = deckName;
         Deck importedDeck = portManager.importDeck(testFilePath);
         assertEquals(testDeck, importedDeck);
+    }
+
+    @Test
+    public void importDeckBadFilePath_failure() throws Exception {
+        String badFile = "NAN";
+        String badFilePath = makeFilePath(badFile).toAbsolutePath().toString();
+        thrown.expect(DeckImportException.class);
+        thrown.expectMessage(String.format(MESSAGE_FILEPATH_INVALID, badFilePath));
+
+        portManager.importDeck(badFilePath);
+    }
+
+    @Test
+    public void importDeckCorruptedFile_failure() throws Exception {
+        String badFilePath = "InvalidDeck";
+
+        thrown.expect(DeckImportException.class);
+        thrown.expectMessage(MESSAGE_IMPORTED_DECK_INVALID);
+
+        portManager.importDeck(badFilePath);
+    }
+
+    /**
+     * Converts a string to a full Path.
+     */
+
+    private Path makeFilePath(String name) {
+        Path baseFilePath = Paths.get(portManager.getBfp());
+        if (name.length() > 4 && name.substring(name.length() - 4).equals(".xml")) {
+            return baseFilePath.resolve(name);
+        } else {
+            return baseFilePath.resolve(name + ".xml");
+        }
     }
 
 }

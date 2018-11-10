@@ -33,6 +33,7 @@ public class EndReviewCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
         expectedModel.endReview();
+        expectedModel.commitAnakin(EndReviewCommand.COMMAND_WORD);
 
         assertCommandSuccess(endReviewCommand, model, commandHistory, expectedMessage, expectedModel);
     }

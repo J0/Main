@@ -40,6 +40,9 @@ public class EditDeckCommand extends Command {
 
     public static final String AUTOCOMPLETE_TEXT = COMMAND_WORD + " " + DEFAULT_INDEX;
 
+    public static final String MESSAGE_EDIT_DECK_SUCCESS = "Edited Deck: %1$s";
+
+
 
     private final Index index;
     private final EditDeckDescriptor editDeckDescriptor;

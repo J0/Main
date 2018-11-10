@@ -1,19 +1,12 @@
 package systemtests;
 
-//import static seedu.address.ui.testutil.GuiTestAssert.assertDeckListMatching;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-//import org.junit.Test;
-
 import seedu.address.model.Anakin;
-//import seedu.address.model.deck.Deck;
-//import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
-//import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
 public class SampleDataTest extends AnakinSystemTest {
     /**
@@ -45,9 +38,4 @@ public class SampleDataTest extends AnakinSystemTest {
         }
     }
 
-    //    @Test
-    //    public void addressBook_dataFileDoesNotExist_loadSampleData() {
-    //        Deck[] expectedList = SampleDataUtil.getSampleAnakin();
-    //        assertDeckListMatching(getDeckListPanel(), expectedList);
-    //    }
 }

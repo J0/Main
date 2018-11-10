@@ -17,13 +17,13 @@ public class HelpCommandTest {
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
-    private Model anakinModel = new ModelManager();
-    private Model expectedAnakinModel = new ModelManager();
+    private Model model = new ModelManager();
+    private Model expectedModel = new ModelManager();
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void execute_help_success() {
-        assertCommandSuccess(new HelpCommand(), anakinModel, commandHistory, SHOWING_HELP_MESSAGE, expectedAnakinModel);
+        assertCommandSuccess(new HelpCommand(), model, commandHistory, SHOWING_HELP_MESSAGE, expectedModel);
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ShowHelpRequestEvent);
         assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
     }

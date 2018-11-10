@@ -28,11 +28,6 @@ public class TypicalDecks {
     public static final Deck DECK_I = new DeckBuilder().withName("John History").build();
 
 
-
-
-
-
-
     public static final Deck THERE = new DeckBuilder().withName("Baby there")
             .withCards(TypicalCards.getTypicalCards()).build();
     public static final Deck NOTHING = new DeckBuilder().withName("is nothing").build();
@@ -64,6 +59,20 @@ public class TypicalDecks {
         }
 
         ak.getIntoDeck(DECK_WITH_CARDS);
+        return ak;
+    }
+
+    /**
+     * Returns an {@code Anakin} with all typical decks and is already reviewing DECK_WITH_CARDS.
+     */
+    public static Anakin getTypicalAnakinInDeckReview() {
+        Anakin ak = new Anakin();
+        for (Deck deck : getTypicalDecks()) {
+            ak.addDeck(deck);
+        }
+
+        ak.getIntoDeck(DECK_WITH_CARDS);
+        ak.startReview();
         return ak;
     }
 

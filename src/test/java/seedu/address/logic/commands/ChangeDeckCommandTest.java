@@ -2,11 +2,14 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.ChangeDeckCommand.EXIT_DECK_ARGS;
 import static seedu.address.logic.commands.ChangeDeckCommand.MESSAGE_CD_SUCCESS;
+import static seedu.address.logic.commands.ChangeDeckCommand.MESSAGE_EXIT_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showDeckAtIndex;
 import static seedu.address.testutil.TypicalDecks.getTypicalAnakin;
+import static seedu.address.testutil.TypicalDecks.getTypicalAnakinInDeck;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_DECK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_DECK;
 
@@ -80,6 +83,21 @@ public class ChangeDeckCommandTest {
 
         expectedModel.getIntoDeck(deckToEnter);
         expectedModel.commitAnakin(ChangeDeckCommand.COMMAND_WORD);
+
+        assertCommandSuccess(cdCommand, actualModel, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validLeaveDeck_success() {
+        Model actualModel = new ModelManager(getTypicalAnakinInDeck(), new UserPrefs());
+        ChangeDeckCommand cdCommand = new ChangeDeckCommand();
+
+        String expectedMessage = String.format(MESSAGE_EXIT_SUCCESS);
+
+        Model expectedModel = new ModelManager(actualModel.getAnakin(), new UserPrefs());
+
+        expectedModel.getOutOfDeck();
+        expectedModel.commitAnakin(ChangeDeckCommand.COMMAND_WORD + EXIT_DECK_ARGS);
 
         assertCommandSuccess(cdCommand, actualModel, commandHistory, expectedMessage, expectedModel);
     }

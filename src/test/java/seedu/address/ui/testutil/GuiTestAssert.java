@@ -8,6 +8,7 @@ import guitests.guihandles.CardCardHandle;
 import guitests.guihandles.CardListPanelHandle;
 import guitests.guihandles.DeckCardHandle;
 import guitests.guihandles.DeckListPanelHandle;
+import guitests.guihandles.DeckReviewCardHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import seedu.address.model.deck.Card;
 import seedu.address.model.deck.Deck;
@@ -105,5 +106,18 @@ public class GuiTestAssert {
      */
     public static void assertResultMessage(ResultDisplayHandle resultDisplayHandle, String expected) {
         assertEquals(expected, resultDisplayHandle.getText());
+    }
+
+    /**
+     * Asserts that {@code actualDeckReviewCard} displays the details of {@code expectedDeckReviewCard}.
+     */
+    public static void assertDeckReviewCardDisplaysCard(Card expectedCard, DeckReviewCardHandle actualCard,
+                                                        boolean showAnswer) {
+        if (showAnswer) {
+            assertEquals("A: " + expectedCard.getAnswer().fullAnswer, actualCard.getText());
+        } else {
+            assertEquals("Q: " + expectedCard.getQuestion().fullQuestion, actualCard.getText());
+        }
+
     }
 }

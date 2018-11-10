@@ -3,10 +3,14 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showDeckAtIndex;
 import static seedu.address.testutil.TypicalDecks.getTypicalAnakin;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_DECK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_DECK;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.Test;
 
@@ -30,24 +34,23 @@ public class ExportDeckCommandTest {
     private Model model = new ModelManager(getTypicalAnakin(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
-    //@Test
-    // @Todo Find out why this doesn't work on TRAVIS
-    //    public void execute_validIndexUnfilteredList_success() {
-    //        Deck deckToExport = model.getFilteredDeckList().get(INDEX_FIRST_DECK.getZeroBased());
-    //        ExportDeckCommand exportCommand = new ExportDeckCommand(INDEX_FIRST_DECK);
-    //        Porter temp = new PortManagerExportsDeck();
-    //
-    //        String location = temp.exportDeck(deckToExport);
-    //
-    //        String expectedMessage = String.format(ExportDeckCommand.MESSAGE_EXPORT_DECK_SUCCESS, deckToExport,
-    // location);
-    //
-    //        ModelManager expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
-    //        expectedModel.exportDeck(deckToExport);
-    //        expectedModel.commitAnakin();
-    //
-    //        assertCommandSuccess(exportCommand, model, commandHistory, expectedMessage, expectedModel);
-    //    }
+    @Test
+    public void execute_validIndexUnfilteredList_success() {
+        Deck deckToExport = model.getFilteredDeckList().get(INDEX_FIRST_DECK.getZeroBased());
+        ExportDeckCommand exportCommand = new ExportDeckCommand(INDEX_FIRST_DECK);
+        Porter temp = new PortManagerExportsDeck();
+
+        String location = temp.exportDeck(deckToExport);
+
+        String expectedMessage = String.format(ExportDeckCommand.MESSAGE_EXPORT_DECK_SUCCESS, deckToExport,
+            location);
+
+        ModelManager expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
+        expectedModel.exportDeck(deckToExport);
+        expectedModel.commitAnakin(ExportDeckCommand.COMMAND_WORD);
+
+        assertCommandSuccess(exportCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
@@ -58,26 +61,24 @@ public class ExportDeckCommandTest {
             Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
     }
 
-    //@Test
-    // @Todo Find out why this doesn't work on TRAVIS
-    //    public void execute_validIndexFilteredList_success() {
-    //        showDeckAtIndex(model, INDEX_FIRST_DECK);
-    //
-    //        Deck deckToExport = model.getFilteredDeckList().get(INDEX_FIRST_DECK.getZeroBased());
-    //        ExportDeckCommand exportCommand = new ExportDeckCommand(INDEX_FIRST_DECK);
-    //
-    //        PortManager temp = new PortManager();
-    //        String location = temp.getBfp() + "\\" + deckToExport.getName().fullName + ".xml";
-    //        String expectedMessage = String.format(ExportDeckCommand.MESSAGE_EXPORT_DECK_SUCCESS, deckToExport,
-    // location);
-    //
-    //        Model expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
-    //        showDeckAtIndex(expectedModel, INDEX_FIRST_DECK);
-    //        expectedModel.exportDeck(deckToExport);
-    //        expectedModel.commitAnakin();
-    //
-    //        assertCommandSuccess(exportCommand, model, commandHistory, expectedMessage, expectedModel);
-    //    }
+    @Test
+    public void execute_validIndexFilteredList_success() {
+        showDeckAtIndex(model, INDEX_FIRST_DECK);
+
+        Deck deckToExport = model.getFilteredDeckList().get(INDEX_FIRST_DECK.getZeroBased());
+        ExportDeckCommand exportCommand = new ExportDeckCommand(INDEX_FIRST_DECK);
+
+        String location = makeFilePath(deckToExport.getName().fullName).toAbsolutePath().toString();
+        String expectedMessage = String.format(ExportDeckCommand.MESSAGE_EXPORT_DECK_SUCCESS, deckToExport,
+            location);
+
+        Model expectedModel = new ModelManager(model.getAnakin(), new UserPrefs());
+        showDeckAtIndex(expectedModel, INDEX_FIRST_DECK);
+        expectedModel.exportDeck(deckToExport);
+        expectedModel.commitAnakin(ExportDeckCommand.COMMAND_WORD);
+
+        assertCommandSuccess(exportCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
@@ -120,13 +121,25 @@ public class ExportDeckCommandTest {
 
         @Override
         public String exportDeck(Deck deck) {
-            PortManager temp = new PortManager();
-            return temp.getBfp() + "\\" + deck.getName().fullName + ".xml";
+            return makeFilePath(deck.getName().fullName).toAbsolutePath().toString();
         }
 
         @Override
         public Deck importDeck(String stringPath) throws DeckImportException {
             throw new AssertionError("This method should not be called.");
+        }
+    }
+
+    /**
+     * Converts a string to a full Path.
+     */
+
+    private static Path makeFilePath(String name) {
+        Path baseFilePath = Paths.get(new PortManager().getBfp());
+        if (name.length() > 4 && name.substring(name.length() - 4).equals(".xml")) {
+            return baseFilePath.resolve(name);
+        } else {
+            return baseFilePath.resolve(name + ".xml");
         }
     }
 }

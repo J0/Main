@@ -14,11 +14,11 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteDeckCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.deck.Deck;
 
-//import static seedu.address.testutil.TestUtil.getMidIndexDeck;
 //import static seedu.address.testutil.TypicalDecks.KEYWORD_MATCHING_JOHN;
 //import seedu.address.logic.commands.RedoCommand;
 
@@ -35,8 +35,8 @@ public class DeleteCommandSystemTest extends AnakinSystemTest {
         /* Case: delete the first deck in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
         String command = "     " + DeleteDeckCommand.COMMAND_WORD + "      " + INDEX_FIRST_DECK.getOneBased() + " ";
-        Deck deletedPerson = removeDeck(expectedModel, INDEX_FIRST_DECK);
-        String expectedResultMessage = String.format(MESSAGE_DELETE_DECK_SUCCESS, deletedPerson);
+        Deck deletedDeck = removeDeck(expectedModel, INDEX_FIRST_DECK);
+        String expectedResultMessage = String.format(MESSAGE_DELETE_DECK_SUCCESS, deletedDeck);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: delete the last deck in the list -> deleted */
@@ -49,15 +49,11 @@ public class DeleteCommandSystemTest extends AnakinSystemTest {
         expectedResultMessage = UndoCommand.MESSAGE_SUCCESS + DeleteDeckCommand.COMMAND_WORD;
         assertCommandSuccess(command, anakinModelBeforeDeletingLast, expectedResultMessage);
 
-        //        /* Case: redo deleting the last Deck in the list -> last deck deleted again */
-        //        command = RedoCommand.COMMAND_WORD;
-        //        removeDeck(anakinModelBeforeDeletingLast, lastDeckIndex);
-        //        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        //        assertCommandSuccess(command, anakinModelBeforeDeletingLast, expectedResultMessage);
-        //
-        //        /* Case: delete the middle deck in the list -> deleted */
-        //        Index middleDeckIndex = getMidIndexDeck(getModel());
-        //        assertCommandSuccess(middleDeckIndex);
+        /* Case: redo deleting the last Deck in the list -> last deck deleted again */
+        command = RedoCommand.COMMAND_WORD;
+        removeDeck(anakinModelBeforeDeletingLast, lastDeckIndex);
+        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS + DeleteDeckCommand.COMMAND_WORD;
+        assertCommandSuccess(command, anakinModelBeforeDeletingLast, expectedResultMessage);
 
         /* ------------------ Performing delete operation while a filtered list is being shown
  ---------------------- */
@@ -81,19 +77,18 @@ public class DeleteCommandSystemTest extends AnakinSystemTest {
  ------------------------ */
 
         //         /* Case: delete the selected deck -> deck list panel selects the person before the deleted person */
-        //        showAllPersons();
-        //        expectedModel = getModel();
-        //        Index selectedIndex = getLastIndex(expectedModel);
-        //        Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased() - 1);
-        //        selectPerson(selectedIndex);
-        //        command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
-        //        deletedPerson = removeDeck(expectedModel, selectedIndex);
-        //        expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
-        //        assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
-        //
-        //        /* --------------------------------- Performing invalid delete operation
-        // ------------------------------------ */
-        //
+        //                showAllDecks();
+        //                expectedModel = getModel();
+        //                Index selectedIndex = getLastIndex(expectedModel);
+        //                Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased() - 1);
+        //                selectDeck(selectedIndex);
+        //                command = DeleteDeckCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
+        //                deletedDeck = removeDeck(expectedModel, selectedIndex);
+        //                expectedResultMessage = String.format(MESSAGE_DELETE_DECK_SUCCESS, deletedDeck);
+        //                assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
+        //                /* --------------------------------- Performing invalid delete operation
+        //         ------------------------------------ */
+
         /* Case: invalid index (0) -> rejected */
         command = DeleteDeckCommand.COMMAND_WORD + " 0";
         assertCommandFailure(command, MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
