@@ -490,14 +490,14 @@ Format: `clear`
 Exits the program. +
 Format: `exit`
 
-// start::autocompletion[]
+// tag::autocompletion[]
 === Autocompletion : Hit `<TAB>`
 
 Provides autocompletion for existing text. If there is an available autocompletion for the text in the textbox then hitting <TAB> will replace the text in the command box with the autocompletion text of the existing command
 which is lexicographically closest to what is in the text box. If the command box is empty autocompletion will default to ``cd 1``. Unfortunately, this feature does not work with trailing or preceeding whitespace currently.
 
 // end::autocompletion[]
-// start::rank[]
+// tag::rank[]
 === Rank : `rank`
 
 When in a deck, this command sorts all by a user's cummulative performance score on each card as determined by the Super Memo 2 algorithm. +

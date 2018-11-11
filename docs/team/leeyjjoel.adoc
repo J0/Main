@@ -3,7 +3,7 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-This portfolio outlines the contributions of Lee Yi Jie Joel to the following project(s).
+This portfolio outlines my contributions  to the following project(s).
 
 == PROJECT: Anakin
 
@@ -14,6 +14,7 @@ the National University of Singapore. The team comprises Tay Yu Jia, Joel Lee, F
 Trong Truong Thanh.
 
 == Overview
+
 
 Anakin is a desktop-based flashcard application which makes remembering things easy. The user
 interacts with it using a CLI, and it has a GUI created with JavaFX. Its key selling points are the ability to replace
@@ -32,8 +33,15 @@ It is written in Java, and has about 10 kLoC.
 
 This section acts as a summary of the contributions made by Lee Yi Jie Joel to project Anakin.
 
-* *Major enhancement*: added *showDue* command as well as the scheduling algorithm behind it
-** What it does: allows the users to see cards which have been scheduled on a particular date  .
+* *Major enhancement*: I added autocompletion for commands
+** What it does: allows the users to sort cards by when they should be reviewed.
+** Justification: This feature improves the product significantly because a user will want to be able to finish expressing
+the command he wants to type with a simple press of <TAB>
+** Highlights: This enhancement affects existing commands and commands to be added in future. While typing in the command box, the student is saved from the hassle of typing and remembering
+long strings of command syntax. This will allow for a better user experience and in turn easier studying for tests.
+
+* *Major enhancement*: I added the *rank* command as well as the scheduling algorithm behind it
+** What it does: allows the users to sort cards by when they should be reviewed.
 ** Justification: This feature improves the product significantly because a user will want to be able to look through
  review cards based on how he has classified them
 ** Highlights: This enhancement affects existing commands and commands to be added in future. While in the review
@@ -63,6 +71,7 @@ https://github.com/CS2103-AY1819S1-T09-2/main/issues?q=is%3Aissue+is%3Aclosed+au
 
 ** Enhancements to existing features:
 *** Created system tests (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/158[#158])
+
 ** Documentation:
 
 ** Community:
@@ -78,7 +87,7 @@ This is a work in progress
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
-
+include::../UserGuide.adoc[tag=autocompletion]
 include::../UserGuide.adoc[tag=rank]
 
 
