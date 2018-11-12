@@ -522,7 +522,7 @@ Additionally, this feature does not work with trailing or preceding whitespace c
 // tag::rank[]
 === Rank : `rank`
 
-To sorts all by a user's cumulative performance score on each card. +
+To sort all cards by a user's cumulative performance score on each card. +
 Format: `rank` +
 Examples: Suppose you are studying for an important exam, and you want to find out which cards you performed poorly on so you can review them.
 
