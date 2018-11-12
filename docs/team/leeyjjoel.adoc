@@ -4,7 +4,7 @@
 :stylesDir: ../stylesheets
 :repoURL: https://github.com/CS2103-AY1819S1-T09-2/main/tree/master
 
-This portfolio outlines my contributions  to the following project(s).
+This portfolio outlines my contributions  to the following project.
 
 == PROJECT: Anakin
 
@@ -72,7 +72,7 @@ https://github.com/CS2103-AY1819S1-T09-2/main/issues?q=is%3Aissue+is%3Aclosed+au
 *** Added initial documentation for team README (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/23[#23])
 *** Integrate Reposense for code contribution tracking (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/75/files[#75])
 *** Configure naming convention of files and packages across the project to comply with project style guide(https://github.com/CS2103-AY1819S1-T09-2/main/pull/38/files[#38]
-,https://github.com/CS2103-AY1819S1-T09-2/main/pull/106/files[#106])
+, https://github.com/CS2103-AY1819S1-T09-2/main/pull/106/files[#106])
 
 
 
@@ -114,7 +114,6 @@ include::../UserGuide.adoc[tag=undoredo]
 |===
 
 include::../DeveloperGuide.adoc[tag=autocompleteimplementation]
-include::../DeveloperGuide.adoc[tag=rank]
 include::../DeveloperGuide.adoc[tag=deckleveloperation]
 
 

@@ -552,7 +552,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 === Autocomplete Implementation
 ==== Current implementation (v1.4)
 
-Autocompletion in Anakin is handled by an Autocompleter.
+The logic behind autocompletion is handled by an `Autocompleter` class.
 
 On pressing `<TAB>`, Command Box will raise an event and check if the current text in the command box is autocompletable, that is to say, it is a prefix of one of the existing commands supported by Anakin.
 If it is Autocompletable, Autocompleter will search through the list of existing commands in lexicographic order and find the first match for the current text in the command box.
@@ -590,7 +590,13 @@ image::AddCommandToAutocompleterExample.png[width="600"]
 With that, you're good to go!
 
 // end::autocompleteimplementation[]
+
+
+
+
 [[Implementation-Configuration]]
+
+
 === Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).

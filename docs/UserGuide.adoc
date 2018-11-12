@@ -499,12 +499,19 @@ Format: `exit`
 Provides autocompletion for existing text. If there is an available autocompletion for the text in the textbox then hitting <TAB> will replace the text in the command box with the autocompletion text of the existing command
 which is lexicographically closest to what is in the text box. If the command box is empty autocompletion will default to ``cd 1``. Unfortunately, this feature does not work with trailing or preceding whitespace currently. +
 
-*Examples*: +
+Examples: +
 
-1. Suppose you're attempting to type a new question
+1. Suppose you're attempting to create a new card.
+
+image::newCardPreAutocomplete.png[width="500"]
+
+Description: Partially completed `newcard` command.
 
 2. Just hit <TAB> and you will instantly get the desired result
 
+image::newCardPostAutocomplete.png[width="500"]
+
+Description: After pressing <TAB> the command is automatically completed!
 
 // end::autocompletion[]
 // tag::rank[]
@@ -512,12 +519,25 @@ which is lexicographically closest to what is in the text box. If the command bo
 
 When in a deck, this command sorts all by a user's cumulative performance score on each card as determined by the Super Memo 2 algorithm. +
 Format: `rank` +
-*Example*: Suppose you are studying for an important exam, and you want to find out which cards you performed poorly on so you can review them.
+Examples: Suppose you are studying for an important exam, and you want to find out which cards you performed poorly on so you can review them.
 
 
-1. Type `rank` to sort your cards in order of performance score
+1. Classify cards as described in the `classify` section above and type `rank`
 
-2. Hit <TAB> and you will instantly get the desired result
+image::rankScreenshot1.png[width="500"]
+
+Description: Appearance of cards before sorting by performance
+
+2. Type  and you will instantly get the desired result
+
+image::rankScreenshot2.png[width="500"]
+Description: Appearance of cards after sorting by performance. As can be seen, harder cards move to the top. +
+
+[NOTE]
+====
+ The indicator in the card panel only shows the most recent classification of the card while the scheduling algorithm takes into account all past reviews.
+As such, cards labelled HARD may not always be above cards ranked NORMAL.
+====
 
 
 // end::rank[]
