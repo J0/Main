@@ -21,7 +21,11 @@ interacts with it using a CLI, and it has a GUI created with JavaFX. Its key sel
 traditional paper flashcards (thus saving the environment) and to provide an enhanced learning experience through the
 well-established spaced repetition learning method.
 
+image::Ui.png[width="500"]
+
+
 It is written in Java, and has about 10 kLoC.
+
 
 * *Main features*:
 ** Create decks of flashcards easily
@@ -45,14 +49,14 @@ long strings of command syntax. This will allow for a better user experience and
 ** Justification: This feature improves the product significantly because a user will want to be able to look through
  review cards based on how he has classified them
 ** Highlights: This enhancement affects existing commands and commands to be added in future. While in the review
-mode, using the *supermemo2* spaced recognition algorithm, the student is saved from the hassle of seperating his/her flashcards
+mode, using the *supermemo2* spaced recognition algorithm, the student is saved from the hassle of separating his/her flashcards
 into boxes based on how well he/she remembers them. This will allow for a better studying experience and in turn better recall for tests
 
 * *Minor enhancements*:
 ** Help command which allows user to seek help when he/she is lost or initially starting out
-** Added systemtests to increase robustness of the application
-** Implemented a `editdeck` command that allows user to update the details of their deck.
-** Added an exit command to allow user to leave the deck
+** Added system tests to increase robustness of the application
+** Implemented the `editdeck` command that allows users to update the details of their deck.
+** Added an exit command to allow the user to leave the deck
 ** Added a `select` command which is now deprecated
 ** Add `undo` and `redo` functions
 ** Implement autocompletion function
@@ -67,7 +71,7 @@ into boxes based on how well he/she remembers them. This will allow for a better
 https://github.com/CS2103-AY1819S1-T09-2/main/issues?q=is%3Aissue+is%3Aclosed+author%3Aleeyjjoel[List of created issues]
 *** Update contact us page (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/68[#68])
 *** Added initial documentation for team README (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/23[#23])
-*** Integrate reposense for code contribution tracking
+*** Integrate RepoSense for code contribution tracking
 
 ** Enhancements to existing features:
 *** Created system tests (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/158[#158])
