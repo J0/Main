@@ -315,20 +315,6 @@ Format: `sort`
 
 // end::sort[]
 
-// tag::showDue[]
-=== Show cards that should be reviewed on a particular date : `showDue` [coming in v1.4]
-Show cards due on a particular date
-
-* Shows the cards which require a review for a particular date based on past card performance. +
-
-Format: `showDue c/10 m/12 y/14`
-****
-* Note: User must be inside a deck to perform this command.
-* The above command will display the cards due on the 10th December, 2014. If no arguments are given for date
-* If no day, month or year is given, showDue will default to showing the cards due for today
-****
-// end::showDue[]
-
 // tag::find[]
 === Search for a deck or card : `find`
 
@@ -494,14 +480,29 @@ Format: `exit`
 === Autocompletion : Hit `<TAB>`
 
 Provides autocompletion for existing text. If there is an available autocompletion for the text in the textbox then hitting <TAB> will replace the text in the command box with the autocompletion text of the existing command
-which is lexicographically closest to what is in the text box. If the command box is empty autocompletion will default to ``cd 1``. Unfortunately, this feature does not work with trailing or preceeding whitespace currently.
+which is lexicographically closest to what is in the text box. If the command box is empty autocompletion will default to ``cd 1``. Unfortunately, this feature does not work with trailing or preceding whitespace currently. +
+
+*Examples*: +
+
+1. Suppose you're attempting to type a new question
+
+2. Just hit <TAB> and you will instantly get the desired result
+
 
 // end::autocompletion[]
 // tag::rank[]
 === Rank : `rank`
 
-When in a deck, this command sorts all by a user's cummulative performance score on each card as determined by the Super Memo 2 algorithm. +
-Format: `rank`
+When in a deck, this command sorts all by a user's cumulative performance score on each card as determined by the Super Memo 2 algorithm. +
+Format: `rank` +
+*Example*: Suppose you are studying for an important exam, and you want to find out which cards you performed poorly on so you can review them.
+
+
+1. Type `rank` to sort your cards in order of performance score
+
+2. Hit <TAB> and you will instantly get the desired result
+
+
 // end::rank[]
 
 

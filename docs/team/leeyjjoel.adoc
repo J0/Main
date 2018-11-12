@@ -82,6 +82,8 @@ https://github.com/CS2103-AY1819S1-T09-2/main/issues?q=is%3Aissue+is%3Aclosed+au
 *** PRs reviewed (with non-trivial review comments):
 https://github.com/CS2103-AY1819S1-T09-2/main/pull/189[#189]
 https://github.com/CS2103-AY1819S1-T09-2/main/pull/195[#195]
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/271[#271]
+
 
 *** Discovered and reported bugs to peers:
 This is a work in progress
@@ -93,6 +95,7 @@ This is a work in progress
 |===
 include::../UserGuide.adoc[tag=autocompletion]
 include::../UserGuide.adoc[tag=rank]
+include::../UserGuide.adoc[tag=undoredo]
 
 
 == Contributions to the Developer Guide
@@ -102,6 +105,8 @@ include::../UserGuide.adoc[tag=rank]
 |===
 
 include::../DeveloperGuide.adoc[tag=autocompleteimplementation]
-include::../DeveloperGuide.adoc[tag=decklevelcommands]
+include::../DeveloperGuide.adoc[tag=deckleveloperation]
+
+
 
 
