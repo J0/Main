@@ -577,9 +577,9 @@ With that, you're good to go!
 === Card Scheduling implementation
 ==== Current implementation (v1.4)
 
-The logic behind scheduling is handled in `Card.java`. Each card contains a `reviewScore` and `nextReviewDate` fields which determine how well the user remembers the card and when the user should review the card again.
+The logic behind scheduling is handled in `Card.java`. Each card contains `reviewScore` and `nextReviewDate` fields which determine how well the user remembers the card and when the user should review the card again respectively.
 When each card is classified using `classify`, it's score is adjusted according to a modified version of the Super Memo 2 algorithm which we have detailed below. The review score is then updated, and using this review score
-days are added to the current review date of the card to determine when it should be reviewed.
+we calculate the number of days to add to the current review date.
 
 ==== Design considerations
 
