@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-//import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +36,11 @@ import seedu.address.logic.commands.UndoCommand;
  */
 
 public class Autocompleter {
-    // This method of approaching the problem was inspired by @jethrokuan
+    /** This method of approaching the problem was inspired by verbal discussion with @jethrokuan
+     * (a Year Three CS student)
+     * His team's CS2103 project can be found at  https://github.com/jethrokuan/main
+     */
+
     /**
      * Checks if {@code commandBox}'s commandTextField has a potential autocompletable command word,
      * if there exists such a word, it is replaced with the relevant autocompletion command.
@@ -88,11 +91,10 @@ public class Autocompleter {
     }
 
     /**
-     * Creates a list of all existing command classes and returns it to the user.
+     * Creates a list of all existing command classes and returns it to the user so that
+     * the user can retrieve properties within each command class.
      */
     private static List<Class<? extends Command>> getCommandClasses() {
-        //        File directory = new File(COMMAND_DIRECTORY);
-        //        File[] fList = directory.listFiles();
         List<Class<? extends Command>> commandClasses = new ArrayList<>();
         commandClasses.add(ChangeDeckCommand.class);
         commandClasses.add(ClassifyCommand.class);
