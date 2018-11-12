@@ -29,6 +29,11 @@ public class TypicalCards {
     public static final Card IS = new CardBuilder().withQuestion("dreams is").build();
     public static final Card ALL = new CardBuilder().withQuestion("all it's gonna take").build();
 
+    public static final Card CARD_EASY = new CardBuilder().withQuestion("An easy card")
+            .withPerformance(Performance.EASY).build();
+    public static final Card CARD_HARD = new CardBuilder().withQuestion("A hard card")
+            .withPerformance(Performance.HARD).build();
+
     public static final Card CARD_A_WITH_META = new CardBuilder().withQuestion("An").withAnswer("Empty")
             .withPerformance(Performance.EASY).withTimesReviewed(5).build();
 
@@ -45,6 +50,7 @@ public class TypicalCards {
 
     public static List<Card> getTypicalCards() {
         return new ArrayList<>(Arrays.asList(CARD_A, CARD_B, CARD_C, CARD_D, CARD_E, CARD_F, CARD_G,
+                CARD_EASY, CARD_HARD,
                 MILLION, IS, ALL));
     }
 }

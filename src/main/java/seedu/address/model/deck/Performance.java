@@ -30,7 +30,7 @@ public enum Performance {
             return false;
         }
         try {
-            Performance dummy = Performance.type(type);
+            Performance.type(type);
             return true;
         } catch (IllegalArgumentException e) {
             return false;

@@ -81,6 +81,23 @@ Format: `help`
 Displays a list of all available decks. If inside a deck displays all cards in that deck. +
 Format: `list`
 
+==== Filter by performance
+This feature allows you to filter the displayed cards by their difficulty.
+
+Format: `list [difficulty] [more difficulties]...`
+
+When inside a deck, the `list` command can be used to filter the displayed cards by their difficulty, by passing
+ in the desired difficulty as a keyword after the command.
+
+For example:
+
+`list hard` will display all cards with the `hard` difficulty
+
+Multiple difficulties can be specified as well, in which case all cards with a difficulty matching one of those
+specified will be displayed:
+
+`list easy hard` will display all cards with either an `easy` or `hard` difficulty.
+
 
 === Navigating into a deck : `cd`
 To enter a deck identified by the INDEX_OF_DECK in the visible deck list. +
