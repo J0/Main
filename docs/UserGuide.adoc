@@ -485,19 +485,18 @@ The `redo` command fails as there are no `undo` commands executed previously.
 // end::undoredo[]
 
 === Clearing all entries : `clear`
-Clears all entries from Anakin. +
+To clear all entries from Anakin. +
 Format: `clear`
 
 
 === Exiting Anakin : `exit`
-Exits the program. +
+To exit the program. +
 Format: `exit`
 
 // tag::autocompletion[]
 === Autocompletion : Hit `<TAB>`
 
-Provides autocompletion so you don't have to remember verbose commands. If there is an available autocompletion, hitting <TAB> will replace the current text in the command box with the autocompletion text of the existing command
-which is lexicographically closest to what is in the text box. +
+Hit <TAB> for autocompletion so you don't have to remember verbose commands. If there is an autocompletion available, hitting <TAB> will replace the current text in the command box with the autocompletion text.
 
 Examples: +
 
@@ -505,13 +504,13 @@ Examples: +
 
 image::newCardPreAutocomplete.png[width="500"]
 
-Description: Partially completed `newcard` command.
+Image: Partially completed `newcard` command.
 
 2. Just hit <TAB> and you will instantly get the desired result
 
 image::newCardPostAutocomplete.png[width="500"]
 
-Description: After pressing <TAB> the command is automatically completed!
+Image: After pressing <TAB> the command is automatically completed!
 
 [NOTE]
 ====
@@ -523,7 +522,7 @@ Additionally, this feature does not work with trailing or preceding whitespace c
 // tag::rank[]
 === Rank : `rank`
 
-When in a deck, this command sorts all by a user's cumulative performance score on each card as determined by the Super Memo 2 algorithm. +
+To sorts all by a user's cumulative performance score on each card. +
 Format: `rank` +
 Examples: Suppose you are studying for an important exam, and you want to find out which cards you performed poorly on so you can review them.
 
@@ -532,12 +531,12 @@ Examples: Suppose you are studying for an important exam, and you want to find o
 
 image::rankScreenshot1.png[width="500"]
 
-Description: Appearance of cards before sorting by performance
+Image: Appearance of cards before sorting by performance
 
 2. Type  and you will instantly get the desired result
 
 image::rankScreenshot2.png[width="500"]
-Description: Appearance of cards after sorting by performance. As can be seen, harder cards move to the top. +
+Image: Appearance of cards after sorting by performance. As can be seen, harder cards move to the top. +
 
 [NOTE]
 ====
