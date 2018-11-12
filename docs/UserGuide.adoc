@@ -496,8 +496,8 @@ Format: `exit`
 // tag::autocompletion[]
 === Autocompletion : Hit `<TAB>`
 
-Provides autocompletion for existing text. If there is an available autocompletion for the text in the textbox then hitting <TAB> will replace the text in the command box with the autocompletion text of the existing command
-which is lexicographically closest to what is in the text box. If the command box is empty autocompletion will default to ``cd 1``. Unfortunately, this feature does not work with trailing or preceding whitespace currently. +
+Provides autocompletion so you don't have to remember verbose commands. If there is an available autocompletion, hitting <TAB> will replace the current text in the command box with the autocompletion text of the existing command
+which is lexicographically closest to what is in the text box. +
 
 Examples: +
 
@@ -512,6 +512,12 @@ Description: Partially completed `newcard` command.
 image::newCardPostAutocomplete.png[width="500"]
 
 Description: After pressing <TAB> the command is automatically completed!
+
+[NOTE]
+====
+If the command box is empty autocompletion will default to ``cd 1``.
+Additionally, this feature does not work with trailing or preceding whitespace currently.
+====
 
 // end::autocompletion[]
 // tag::rank[]
