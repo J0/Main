@@ -23,12 +23,15 @@ Team T09-2 consisted of myself, Joel Lee, Tay Yu Jia, Foo Guo Wei, and David Goh
  *** Allows Anakin to have a list of decks, each deck contains a card list with questions and answers.
  *** Allows UI to observe both the deck list and card list so that it can update its deck panel and
  card panel when these lists are modified (executing commands).
- *** Allows Logic component to execute its set of commands by providing a Model interface,
+ *** Allows Logic component to execute its set of commands by providing a detailed Model interface,
  which can support the logic of those operations.
 
- ** Justification:
- The new model component determines how objects like deck and card interacts with each other and
-  manipulate the state of the application.
+ ** Justification: A new Model is needed to manipulates the state of the application
+ and determines the interaction between objects like deck and card.
+
+ ** Highlights:
+ Re-designing the Model component requires in-depth understanding of all components in order to have
+ a comprehensive application design.
 
 
 * *Other enhancements:*
