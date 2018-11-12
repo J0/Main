@@ -1050,6 +1050,68 @@ Use case ends.
 //end:: usecases[]
 
 [appendix]
+== Instructions for Manual Testing
+Given below are instructions to test Anakin manually. These instructions only provide a starting framework for testers; testers are expected to do additional, exploratory testing.
+
+=== Launch
+Initial launch
+
+. Download the jar file and copy into an empty folder
+
+. Double-click the jar file to launch Anakin
+Expected: Shows the GUI with a set of sample decks.
+
+=== Navigating into a deck
+Prerequisites: There must be at least 1 deck in the application.
+
+. `cd INDEX_OF_DECK` where `INDEX_OF_DECK` is the currently displayed index of the target deck.
+. The card panel on the right of the deck panel should be populated with a list of the cards in the target deck. If the deck is empty, no cards will be shown.
+
+=== Exporting a deck
+Exporting a deck from Anakin to a `.xml` file.
+Prerequisites: There must be at least 1 deck in the application.
+
+. Enter the command `export INDEX_OF_DECK` where `INDEX_OF_DECK` is the currently displayed index of the target deck.
+
+. Check the directory that contains Anakin.jar. There should be a `.xml` file with the same name as the target deck.
+
+=== Importing a deck
+Importing a deck from a `.xml` file at a known file location
+Prerequisites: Target deck must not already exist in Anakin. Renaming an existing deck is acceptable.
+
+. Enter the command `import DECK_FILEPATH` where `DECK_FILEPATH` is the relative filepath of the deck from the folder that Anakin.jar is in.
+
+. Anakin should display an import success message and the deck should appear in the deck panel.
+
+. Navigating into the deck should display all the cards of that deck. (Assuming the deck was not empty)
+
+. Performing the same operation again should display an error that states "This deck already exist in Anakin"
+
+*Importing a file that is in the same folder as Anakin.jar*
+Prerequisites: Target must be in the same folder as Anakin.jar. Target deck must not already exist in Anakin. Renaming an existing deck is acceptable.
+
+. Enter the command `import DECK_NAME` where `DECK_NAME` is the name of the `.xml` file.
+
+. Anakin should display an import success message and the deck should appear in the deck panel.
+
+. Navigating into the deck should display all the cards of that deck. (Assuming the deck was not empty)
+
+. Performing the same operation again should display an error that states "This deck already exist in Anakin"
+
+
+*Importing from an invalid location*
+
+. Enter `import BAD_FILEPATH` where `BAD_FILEPATH` is a non-existent location.
+. Anakin should display an error stating "File at `BAD_FILEPATH` could not be found".
+
+*Importing an invalid file*
+
+. Enter the command `import DECK_FILEPATH` where `DECK_FILEPATH` is the relative filepath of a corrupted or invalid from the folder that Anakin.jar is in.
+. Anakin should display an error stating "Target deck contains invalid data".
+
+
+
+[appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.

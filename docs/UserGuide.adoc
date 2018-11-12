@@ -69,6 +69,8 @@ Refer to <<Features>> for more details on the available commands.
 * Optional items separated by - e.g. `editdeck 1 [q/Question?]-[a/Answer]` denote that at least one of the optional
  parameters are needed minimally to execute the command.
 * Parameters can be in any order e.g. if the command specifies `q/QUESTION a/ANSWER`, `a/ANSWER q/QUESTION` is also acceptable.
+* Any argument followed by `...` indicates that the command is able to accept multiple arguments for that field.
+* If you provide multiple parameters for fields that do not support multiple arguments, only the last argument will be accepted. I.e. If you entered `newdeck n/nameOne n/nameTwo`, the new deck will have the name "nameTwo".
 ====
 
 === Viewing help : `help`
@@ -341,7 +343,7 @@ Search decks by names or cards by questions.
 
 * If user is not in a deck, find decks.
 
-Format: `find KEYWORD [MORE_KEYWORDS]…`
+Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -399,28 +401,27 @@ Format: `import FILEPATH`
 ****
 * You must include the filename of the target file in `FILEPATH`.
 * This operation is disabled when you navigate into a deck.
-* The default base directory is the same directory as the Anakin.jar file.
+* The default base directory is the directory that the Anakin.jar file is in.
 ****
 
 Examples:
 
-Say you want to import a deck called "Geography" and you have the `Geography.xml` file in the same directory as Anakin.jar. +
+Say you want to import a deck called "Geography" and you have the `Geography.xml` file in the same folder as Anakin.jar. +
 
 image::exportScreenshot3.png[width="300"]
 
-* Simply  enter `import Geography.xml` +
+* Simply  enter `import Geography.xml` and Anakin will import the deck "Geography". +
 
-Before:
+**Before**
 
 image::importScreenshot1.png[width="500"]
 
-After:
+**After**
 
 image::importScreenshot2.png[width="500"]
 
-Anakin imports the deck "My Deck" if it is in the same directory as the Anakin.jar file.
-* `import C:/Users/Admin/Desktop/My Deck2.xml` +
-Anakin imports the deck "My Deck2".
+
+* If you want to import a deck that is located elsewhere, for example the file is in Desktop, you can enter `import` followed by the full filepath (something like: `import C:/Users/Admin/Desktop/My Deck2.xml`) and Anakin will be able to import the deck. +
 
 // end::importexport[]
 
