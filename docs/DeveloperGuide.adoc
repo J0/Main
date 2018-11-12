@@ -221,6 +221,26 @@ image::Newcard Sequence Diagram.png[width="790", align="left"]
 ** Cons: The logic for executing deck-level and card-level commands are implemented at different places. We must ensure that the implementation of each command is correct.
 
 // end::cardleveloperation[]
+// tag::deckleveloperation[]
+=== Deck-level operations
+The following deck level operations are supported in Anakin:
+
+* Anakin#newDeck()
+* Anakin#removeDeck()
+* Anakin#updateDeck()
+* Anakin#importDeck()
+* Anakin#exportDeck()
+
+The following sequence diagram describes how the editdeck command would work: +
+    
+Step 1: +
+Step 2: +
+Step 3: +
+
+* *Alternative 1* : <Insert first option here>
+* *Alternative 2* : <Insert Alternative here>
+
+// end::deckleveloperation[]
 
 // tag::handleinvalidcommands[]
 === Handle invalid commands

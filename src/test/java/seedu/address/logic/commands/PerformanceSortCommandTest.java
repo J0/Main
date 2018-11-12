@@ -6,7 +6,6 @@ import static seedu.address.testutil.TypicalCards.getTypicalDeck;
 import java.util.List;
 
 import org.junit.Test;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Anakin;
 import seedu.address.model.ModelManager;
