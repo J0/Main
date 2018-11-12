@@ -2,6 +2,7 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:repoURL: https://github.com/CS2103-AY1819S1-T09-2/main/tree/master
 
 This portfolio outlines my contributions  to the following project(s).
 
@@ -9,17 +10,16 @@ This portfolio outlines my contributions  to the following project(s).
 
 ---
 
-This project was completed during August 2018 to November 2018 as part of a Software Engineering module (CS2103T) in
-the National University of Singapore. The team comprises Tay Yu Jia, Joel Lee, Foo Guo Wei, David Goh and Nguyen
-Trong Truong Thanh.
+Anakin is the result of our search for a better command line application to revise for exams. From August 2018 to November 2018,
+Team T09-2 comprising of myself, Tay Yu Jia, Foo Guo Wei, David Goh and Nguyen Truong Thanh built Anakin as part of a Software Engineering module (CS2103T) conducted at
+the National University of Singapore.
 
 == Overview
 
-
 Anakin is a desktop-based flashcard application which makes remembering things easy. The user
-interacts with it using a CLI, and it has a GUI created with JavaFX. Its key selling points are the ability to replace
-traditional paper flashcards (thus saving the environment) and to provide an enhanced learning experience through the
-well-established spaced repetition learning method.
+interacts with it using a Command Line Interface, and it has a GUI created with JavaFX. With the same spaced repetition learning methods used by the likes of Duolingo, Wani Kani, and Memrise.
+we aim to revolutionize the studying experience of the tech savy user. On top of being an efficient tool,
+Anakin is environmentally friendly, having zero paper wastage unlike conventional flashcards.
 
 image::Ui.png[width="500"]
 
@@ -44,25 +44,24 @@ the command he wants to type with a simple press of <TAB>
 ** Highlights: This enhancement affects existing commands and commands to be added in future. While typing in the command box, the student is saved from the hassle of typing and remembering
 long strings of command syntax. This will allow for a better user experience and in turn easier studying for tests.
 
-* *Major enhancement*: I added the *rank* command as well as the scheduling algorithm behind it
+* *Major enhancement*: I added the scheduling algorithm at the core of the product together with the `rank` command
 ** What it does: allows the users to sort cards by when they should be reviewed.
 ** Justification: This feature improves the product significantly because a user will want to be able to look through
  review cards based on how he has classified them
-** Highlights: This enhancement affects existing commands and commands to be added in future. While in the review
-mode, using the *supermemo2* spaced recognition algorithm, the student is saved from the hassle of separating his/her flashcards
-into boxes based on how well he/she remembers them. This will allow for a better studying experience and in turn better recall for tests
+** Highlights: This allows user to focus on what's important for review by prioritizing
+
 
 * *Minor enhancements*:
-** Help command which allows user to seek help when he/she is lost or initially starting out
-** Added system tests to increase robustness of the application
-** Implemented the `editdeck` command that allows users to update the details of their deck.
-** Added an exit command to allow the user to leave the deck
-** Added a `select` command which is now deprecated
-** Add `undo` and `redo` functions
-** Implement autocompletion function
+** Added Help command which allows user to seek help when he/she is lost.
+** Implemented the `editdeck` command that allows users to update the name of their deck.
+** Added the `exit` command to allow the user to leave the deck
+** Added the `select` command which eventually formed the basis for other commands to be developed.
+** Add `undo` and `redo` commands
 
 
-*Code contributed:* https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=leeyjjoel[GitHub]
+*Code contributed:*
+https://github.com/CS2103-AY1819S1-T09-2/main/commits?author=leeyjjoel[Github Commits],
+https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=leeyjjoel[Reposense]
 
 * *Other contributions*:
 
@@ -71,12 +70,25 @@ into boxes based on how well he/she remembers them. This will allow for a better
 https://github.com/CS2103-AY1819S1-T09-2/main/issues?q=is%3Aissue+is%3Aclosed+author%3Aleeyjjoel[List of created issues]
 *** Update contact us page (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/68[#68])
 *** Added initial documentation for team README (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/23[#23])
-*** Integrate RepoSense for code contribution tracking
+*** Integrate Reposense for code contribution tracking (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/75/files[#75])
+*** Configure naming convention of files and packages across the project to comply with project style guide(https://github.com/CS2103-AY1819S1-T09-2/main/pull/38/files[#38]
+,https://github.com/CS2103-AY1819S1-T09-2/main/pull/106/files[#106])
+
+
 
 ** Enhancements to existing features:
-*** Created system tests (Pull request https://github.com/CS2103-AY1819S1-T09-2/main/pull/158[#158])
+*** Wrote extensive system tests which played a major role in boosting coverage from 66% to the above 90%
+**** Wrote integration tests and tests for help command(https://github.com/CS2103-AY1819S1-T09-2/main/pull/148[#148])
+**** Wrote Unit Tests for editdeck(https://github.com/CS2103-AY1819S1-T09-2/main/pull/121/files[#121])
+**** Wrote tests for EditCard, EditDeckParser, and GUI (https://github.com/CS2103-AY1819S1-T09-2/main/pull/157/files[#157])
+**** Wrote System Tests for ClearCommand, FindCommand, Logic Manager, EditDeck, NewDeck(https://github.com/CS2103-AY1819S1-T09-2/main/pull/158/files[#158],
+https://github.com/CS2103-AY1819S1-T09-2/main/pull/165/files[#165],
+ https://github.com/CS2103-AY1819S1-T09-2/main/pull/238[#238], https://github.com/CS2103-AY1819S1-T09-2/main/pull/242[#242], https://github.com/CS2103-AY1819S1-T09-2/main/pull/244[#244])
+
 
 ** Documentation:
+*** Add documentation for deck level operations(https://github.com/CS2103-AY1819S1-T09-2/main/pull/110/files[#110])
+*** Update user guide and development guide(https://github.com/CS2103-AY1819S1-T09-2/main/pull/268[#268])
 
 ** Community:
 *** PRs reviewed (with non-trivial review comments):
@@ -84,9 +96,6 @@ https://github.com/CS2103-AY1819S1-T09-2/main/pull/189[#189]
 https://github.com/CS2103-AY1819S1-T09-2/main/pull/195[#195]
 https://github.com/CS2103-AY1819S1-T09-2/main/pull/271[#271]
 
-
-*** Discovered and reported bugs to peers:
-This is a work in progress
 
 == Contributions to the User Guide
 
@@ -105,6 +114,7 @@ include::../UserGuide.adoc[tag=undoredo]
 |===
 
 include::../DeveloperGuide.adoc[tag=autocompleteimplementation]
+include::../DeveloperGuide.adoc[tag=rank]
 include::../DeveloperGuide.adoc[tag=deckleveloperation]
 
 
