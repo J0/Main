@@ -17,12 +17,18 @@ the National University of Singapore.
 == Overview
 
 Anakin is a desktop-based flashcard application which makes remembering things easy. The user
-interacts with it using a Command Line Interface, and it has a GUI created with JavaFX. With the same spaced repetition learning methods used by the likes of Duolingo, Wani Kani, and Memrise.
-we aim to revolutionize the studying experience of the tech savy user. On top of being an efficient tool,
-Anakin is environmentally friendly, having zero paper wastage unlike conventional flashcards.
+interacts with it using a Command Line Interface but can fallback to the Java FX GUI if needed. Anakin uses https://www.supermemo.com/english/ol/sm2.htm[Super Memo 2]  which is the  spaced repetition algorithm used by popular language learning tools such as
+Duolingo, Wani Kani, and Memrise. +
+
+Anakin aims to revolutionise the studying experience of the technically advanced user. On top of being easy to use,
+Anakin is also environmentally friendly, having zero paper wastage unlike conventional flashcards.
 
 image::Ui.png[width="500"]
-
+[NOTE]
+====
+What is spaced repetition? +
+Spaced repetition is a learning technique that incorporates increasing intervals of time between subsequent review of previously learned material in order to exploit the psychological spacing effect.
+====
 
 It is written in Java, and has about 10 kLoC.
 
@@ -46,9 +52,9 @@ long strings of command syntax. This will allow for a better user experience and
 
 * *Major enhancement*: I added the scheduling algorithm at the core of the product together with the `rank` command
 ** What it does: allows the users to sort cards by when they should be reviewed.
-** Justification: This feature improves the product significantly because a user will want to be able to look through
- review cards based on how he has classified them
-** Highlights: This allows user to focus on what's important for review by prioritizing
+** Justification: This feature improves the product significantly because a user will want to review cards which he or she performed poorly on
+** Highlights: This allows user to focus on what's important for review by sorting the cards in order of performance and pushing cards which require review to the top of the deck.
+
 
 
 * *Minor enhancements*:
@@ -114,7 +120,7 @@ include::../UserGuide.adoc[tag=undoredo]
 |===
 
 include::../DeveloperGuide.adoc[tag=autocompleteimplementation]
-include::../DeveloperGuide.adoc[tag=deckleveloperation]
+//include::../DeveloperGuide.adoc[tag=deckleveloperation]
 
 
 
